@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HQModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="HQModelStoreContainer">
+          <EntitySet Name="Aya" EntityType="HQModel.Store.Aya" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Media" EntityType="HQModel.Store.Media" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MediaInfo" EntityType="HQModel.Store.MediaInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="HQModel.Store.User" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Aya">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SuraId" Type="int" Nullable="false" />
+          <Property Name="AyaId" Type="int" Nullable="false" />
+          <Property Name="sura" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TextFull" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Story" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Body" Type="image" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Media_Id" Type="bigint" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Duration" Type="time" Nullable="false" />
+          <Property Name="Lenght" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ScreenName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Function Name="Insert_Translate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AyaId" Type="int" Mode="In" />
+          <Parameter Name="LangId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lang" Type="nvarchar" Mode="In" />
+          <Parameter Name="TranslatedBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="Text" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertAyeh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SoorehId" Type="int" Mode="In" />
+          <Parameter Name="Sooreh" Type="nvarchar" Mode="In" />
+          <Parameter Name="ayehId" Type="int" Mode="In" />
+          <Parameter Name="Ayeh" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Update_Ayeh_Ayeh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Ayeh" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UpdateAyeh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SoorehId" Type="int" Mode="In" />
+          <Parameter Name="Sooreh" Type="nvarchar" Mode="In" />
+          <Parameter Name="ayehId" Type="int" Mode="In" />
+          <Parameter Name="Ayeh" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UpdatePersianAya" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="persian" Type="nvarchar(max)" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HQModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HQEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Media" EntityType="HQModel.Medium" />
+          <EntitySet Name="MediaInfoes" EntityType="HQModel.MediaInfo" />
+          <EntitySet Name="Users" EntityType="HQModel.User" />
+          <FunctionImport Name="InsertAyeh">
+            <Parameter Name="SoorehId" Mode="In" Type="Int32" />
+            <Parameter Name="Sooreh" Mode="In" Type="String" />
+            <Parameter Name="ayehId" Mode="In" Type="Int32" />
+            <Parameter Name="Ayeh" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAyeh">
+            <Parameter Name="SoorehId" Mode="In" Type="Int32" />
+            <Parameter Name="Sooreh" Mode="In" Type="String" />
+            <Parameter Name="ayehId" Mode="In" Type="Int32" />
+            <Parameter Name="Ayeh" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePersianAya">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="persian" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTranslate">
+            <Parameter Name="AyaId" Mode="In" Type="Int32" />
+            <Parameter Name="LangId" Mode="In" Type="String" />
+            <Parameter Name="Lang" Mode="In" Type="String" />
+            <Parameter Name="TranslatedBy" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAyehText">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Ayeh" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Ayas" EntityType="HQModel.Aya" />
+        </EntityContainer>
+        <EntityType Name="Medium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Story" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" />
+          <Property Name="EditDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Media_Id" Type="Int64" Nullable="false" />
+          <Property Name="FileType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Duration" Type="Time" Nullable="false" />
+          <Property Name="Lenght" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Aya">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SuraId" Nullable="false" />
+          <Property Type="Int32" Name="AyaId" Nullable="false" />
+          <Property Type="String" Name="sura" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TextFull" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HQModelStoreContainer" CdmEntityContainer="HQEntities">
+          <EntitySetMapping Name="Media"><EntityTypeMapping TypeName="HQModel.Medium"><MappingFragment StoreEntitySet="Media">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Story" ColumnName="Story" />
+            <ScalarProperty Name="Body" ColumnName="Body" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+            <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MediaInfoes"><EntityTypeMapping TypeName="HQModel.MediaInfo"><MappingFragment StoreEntitySet="MediaInfo">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Media_Id" ColumnName="Media_Id" />
+            <ScalarProperty Name="FileType" ColumnName="FileType" />
+            <ScalarProperty Name="Duration" ColumnName="Duration" />
+            <ScalarProperty Name="Lenght" ColumnName="Lenght" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="HQModel.User"><MappingFragment StoreEntitySet="User">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertAyeh" FunctionName="HQModel.Store.InsertAyeh" />
+          <FunctionImportMapping FunctionImportName="UpdateAyeh" FunctionName="HQModel.Store.UpdateAyeh" />
+          <FunctionImportMapping FunctionImportName="UpdatePersianAya" FunctionName="HQModel.Store.UpdatePersianAya" />
+          <FunctionImportMapping FunctionImportName="InsertTranslate" FunctionName="HQModel.Store.Insert_Translate" />
+          <FunctionImportMapping FunctionImportName="UpdateAyehText" FunctionName="HQModel.Store.Update_Ayeh_Ayeh" />
+          <EntitySetMapping Name="Ayas">
+            <EntityTypeMapping TypeName="HQModel.Aya">
+              <MappingFragment StoreEntitySet="Aya">
+                <ScalarProperty Name="TextFull" ColumnName="TextFull" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="sura" ColumnName="sura" />
+                <ScalarProperty Name="AyaId" ColumnName="AyaId" />
+                <ScalarProperty Name="SuraId" ColumnName="SuraId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="HQModel.Medium" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="HQModel.MediaInfo" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="HQModel.User" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="HQModel.Aya" Width="1.5" PointX="3.375" PointY="4.75" Height="2.1725878906249996" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DNE.WebMedia.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DNEWebMediaModelStoreContainer">
+          <EntitySet Name="Aya" EntityType="DNE.WebMedia.Model.Store.Aya" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Media" EntityType="DNE.WebMedia.Model.Store.Media" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MediaInfo" EntityType="DNE.WebMedia.Model.Store.MediaInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Translate" EntityType="DNE.WebMedia.Model.Store.Translate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="DNE.WebMedia.Model.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Aya_Aya" Association="DNE.WebMedia.Model.Store.FK_Aya_Aya">
+            <End Role="Aya" EntitySet="Aya" />
+            <End Role="Aya1" EntitySet="Aya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translate_Aya" Association="DNE.WebMedia.Model.Store.FK_Translate_Aya">
+            <End Role="Aya" EntitySet="Aya" />
+            <End Role="Translate" EntitySet="Translate" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aya">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SuraId" Type="int" Nullable="false" />
+          <Property Name="AyaId" Type="int" Nullable="false" />
+          <Property Name="sura" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TextFull" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Story" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Body" Type="image" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AddDate" Type="datetime" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Media_Id" Type="bigint" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Duration" Type="time" Nullable="false" />
+          <Property Name="Lenght" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Translate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AyaId" Type="int" Nullable="false" />
+          <Property Name="LangId" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Lang" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TranslatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Direction" Type="varchar" Nullable="false" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ScreenName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Aya_Aya">
+          <End Role="Aya" Type="DNE.WebMedia.Model.Store.Aya" Multiplicity="1" />
+          <End Role="Aya1" Type="DNE.WebMedia.Model.Store.Aya" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Aya">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Aya1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translate_Aya">
+          <End Role="Aya" Type="DNE.WebMedia.Model.Store.Aya" Multiplicity="1" />
+          <End Role="Translate" Type="DNE.WebMedia.Model.Store.Translate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aya">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translate">
+              <PropertyRef Name="AyaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DNE.WebMedia.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HQEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aya" EntityType="DNE.WebMedia.Model.Aya" />
+          <EntitySet Name="Media" EntityType="DNE.WebMedia.Model.Media" />
+          <EntitySet Name="MediaInfo" EntityType="DNE.WebMedia.Model.MediaInfo" />
+          <EntitySet Name="Translate" EntityType="DNE.WebMedia.Model.Translate" />
+          <EntitySet Name="User" EntityType="DNE.WebMedia.Model.User" />
+          <AssociationSet Name="FK_Translate_Aya" Association="DNE.WebMedia.Model.FK_Translate_Aya">
+            <End Role="Aya" EntitySet="Aya" />
+            <End Role="Translate" EntitySet="Translate" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aya">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SuraId" Type="Int32" Nullable="false" />
+          <Property Name="AyaId" Type="Int32" Nullable="false" />
+          <Property Name="sura" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TextFull" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Translate" Relationship="DNE.WebMedia.Model.FK_Translate_Aya" FromRole="Aya" ToRole="Translate" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Story" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" />
+          <Property Name="EditDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Media_Id" Type="Int64" Nullable="false" />
+          <Property Name="FileType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Duration" Type="Time" Nullable="false" />
+          <Property Name="Lenght" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Translate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AyaId" Type="Int32" Nullable="false" />
+          <Property Name="LangId" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Lang" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TranslatedBy" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Direction" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Aya" Relationship="DNE.WebMedia.Model.FK_Translate_Aya" FromRole="Translate" ToRole="Aya" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Translate_Aya">
+          <End Role="Aya" Type="DNE.WebMedia.Model.Aya" Multiplicity="1" />
+          <End Role="Translate" Type="DNE.WebMedia.Model.Translate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aya">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translate">
+              <PropertyRef Name="AyaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DNEWebMediaModelStoreContainer" CdmEntityContainer="HQEntities">
+          <EntitySetMapping Name="Aya"><EntityTypeMapping TypeName="DNE.WebMedia.Model.Aya"><MappingFragment StoreEntitySet="Aya">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="SuraId" ColumnName="SuraId" />
+            <ScalarProperty Name="AyaId" ColumnName="AyaId" />
+            <ScalarProperty Name="sura" ColumnName="sura" />
+            <ScalarProperty Name="Text" ColumnName="Text" />
+            <ScalarProperty Name="TextFull" ColumnName="TextFull" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Media"><EntityTypeMapping TypeName="DNE.WebMedia.Model.Media"><MappingFragment StoreEntitySet="Media">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Story" ColumnName="Story" />
+            <ScalarProperty Name="Body" ColumnName="Body" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+            <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MediaInfo"><EntityTypeMapping TypeName="DNE.WebMedia.Model.MediaInfo"><MappingFragment StoreEntitySet="MediaInfo">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Media_Id" ColumnName="Media_Id" />
+            <ScalarProperty Name="FileType" ColumnName="FileType" />
+            <ScalarProperty Name="Duration" ColumnName="Duration" />
+            <ScalarProperty Name="Lenght" ColumnName="Lenght" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Translate"><EntityTypeMapping TypeName="DNE.WebMedia.Model.Translate"><MappingFragment StoreEntitySet="Translate">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="AyaId" ColumnName="AyaId" />
+            <ScalarProperty Name="LangId" ColumnName="LangId" />
+            <ScalarProperty Name="Lang" ColumnName="Lang" />
+            <ScalarProperty Name="TranslatedBy" ColumnName="TranslatedBy" />
+            <ScalarProperty Name="Text" ColumnName="Text" />
+            <ScalarProperty Name="Direction" ColumnName="Direction" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="User"><EntityTypeMapping TypeName="DNE.WebMedia.Model.User"><MappingFragment StoreEntitySet="User">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="HQ">
+        <EntityTypeShape EntityType="DNE.WebMedia.Model.Aya" Width="1.5" PointX="0.75" PointY="1" Height="2.7494921875000005" IsExpanded="true" />
+        <EntityTypeShape EntityType="DNE.WebMedia.Model.Media" Width="1.5" PointX="0.75" PointY="4.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DNE.WebMedia.Model.MediaInfo" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DNE.WebMedia.Model.Translate" Width="1.5" PointX="3" PointY="1" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DNE.WebMedia.Model.User" Width="1.5" PointX="4.75" PointY="4.75" Height="1.9802864583333317" IsExpanded="true" />
+        <AssociationConnector Association="DNE.WebMedia.Model.FK_Translate_Aya" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.2785953776041659" />
+          <ConnectorPoint PointX="3" PointY="2.2785953776041659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
