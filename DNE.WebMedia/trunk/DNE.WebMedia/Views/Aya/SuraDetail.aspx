@@ -4,7 +4,6 @@
     SuraDetail
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="http://cdn.jquerytools.org/1.2.3/all/jquery.tools.min.js"></script>
     <style>
         .tooltipx
         {
@@ -52,8 +51,7 @@
         <%:Model.First().sura %>
         SuraId:
         <%:Model.First().SuraId %></h2>
-    <h3>
-        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h3>
+    <h3>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h3>
     <div style="direction: rtl; text-align: justify;">
         <% foreach (var item in Model) { %>
         <span class="aya">
@@ -66,17 +64,16 @@
         <% } %>
     </div>
     <script type="text/javascript">
-        /* $(".aya").tooltip({ effect: 'fade' });*/
-        $(document).ready(function () {
-            $(".aya").hover(
-		function () { $(this).contents("span:last-child").css({ display: "block" }); },
-		function () { $(this).contents("span:last-child").css({ display: "none" }); }
-	);
-            $(".aya").mousemove(function (e) {
-                var mousex = e.pageX + 10;
-                var mousey = e.pageY + 5;
-                $(this).contents("span:last-child").css({ top: mousey, left: mousex });
-            });
+    $(document).ready(function () {
+        $(".aya").hover(
+		    function () { $(this).contents("span:last-child").css({ display: "block" }); },
+		    function () { $(this).contents("span:last-child").css({ display: "none" }); }
+	    );
+        $(".aya").mousemove(function (e) {
+            var mousex = e.pageX + 10;
+            var mousey = e.pageY + 5;
+            $(this).contents("span:last-child").css({ top: mousey, left: mousex });
         });
+    });
     </script>
 </asp:Content>

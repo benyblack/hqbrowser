@@ -81,14 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="img\tooltip\black.png" />
-    <Content Include="img\tooltip\black_arrow.png" />
-    <Content Include="img\tooltip\black_arrow_big.png" />
-    <Content Include="img\tooltip\black_big.png" />
-    <Content Include="img\tooltip\white.png" />
-    <Content Include="img\tooltip\white_arrow.png" />
-    <Content Include="img\tooltip\white_arrow_big.png" />
-    <Content Include="img\tooltip\white_big.png" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\SuraAya.aspx" />
     <Content Include="Views\Aya\SuraDetail.aspx" />
@@ -100,9 +92,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -125,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DNE.WebMedia.Common\DNE.WebMedia.Common.csproj">
