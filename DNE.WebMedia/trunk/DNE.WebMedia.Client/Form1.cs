@@ -65,6 +65,32 @@ namespace DNE.WebMedia.Client
 			
 		}
 
+        private void button2_Click(object sender, EventArgs e) {
+            string path = "1.doc";
+            Aspose.Words.Document doc = new Aspose.Words.Document(path);
+            doc.GetPageInfo(1);
+
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            string s = File.ReadAllText("1.txt");
+            string pat = @"(.*?)صفحة \(\d\)";
+            MatchCollection mc = Regex.Matches(s, pat, RegexOptions.IgnoreCase   RegexOptions.Singleline);
+            int xx = mc.Count;
+            for (int i = 0; i < xx; i++) {
+                writetext(mc[i].Value, i.ToString() + ".txt");
+                lblCount.Text = i.ToString();
+                lblCount.Refresh();
+                Application.DoEvents();
+
+                
+            }
+        }
+
+        void writetext(string s, string path) {
+            File.WriteAllText(s,Path.Combine( Application.StartupPath ,path));
+
+        }
 
 	}
 }

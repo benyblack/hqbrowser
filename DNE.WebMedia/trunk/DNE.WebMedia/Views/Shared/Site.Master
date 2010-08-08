@@ -14,7 +14,7 @@
 
         <div id="header">
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1>Holy Quran Browser</h1>
             </div>
               
             <div id="logindisplay">
@@ -32,8 +32,10 @@
         </div>
 
         <div id="main">
+            <div id="leftsidebar"></div>
+            <div id="contentbody">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-
+            </div>
             <div id="footer">
             </div>
         </div>
