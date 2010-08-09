@@ -51,8 +51,9 @@
 
 	  <div style="direction: rtl; text-align: justify;">
 		<% foreach (var item in Model) { %>
+        <%if (item.AyaNo == 1 ) {%>
+        <h3><%:item.Aya.sura %></h3><%} %>
         <%if (item.AyaNo == 1 && item.SuraNo !=9  ) {%>
-        <h3><%:item.Aya.sura %></h3>
         <h2>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
         <%} %>
 		<span class="aya">
