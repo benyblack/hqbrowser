@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\HardCodes\Aya.cs" />
+    <Compile Include="Model\HardCodes\PageAya.cs" />
     <Compile Include="Model\HardCodes\Media.cs" />
     <Compile Include="Model\HardCodes\MediaInfo.cs" />
     <Compile Include="Model\HardCodes\Translate.cs" />

@@ -82,6 +82,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
+    <Content Include="Views\Aya\Page.aspx" />
     <Content Include="Views\Aya\SuraAya.aspx" />
     <Content Include="Views\Aya\SuraDetail.aspx" />
     <Content Include="Web.config" />

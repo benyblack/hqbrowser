@@ -62,8 +62,9 @@ namespace DNE.WebMedia.Controllers {
         }
 
         public ActionResult Page(int pageno) {
-
-            return View();
+            HQEntities db = new HQEntities();
+            var ps =   db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
+            return View(ps);
         }
 
     }

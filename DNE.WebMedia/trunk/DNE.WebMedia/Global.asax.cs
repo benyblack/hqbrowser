@@ -17,6 +17,12 @@ namespace DNE.WebMedia
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+              "Page", // Route name
+              "page/{pageno}", // URL with parameters
+              new { controller = "Aya", action = "Page",pageno =1 }
+          );
+
+            routes.MapRoute(
                "Sura", // Route name
                "sura/{id}", // URL with parameters
                new { controller = "Aya", action = "SuraDetail" }
