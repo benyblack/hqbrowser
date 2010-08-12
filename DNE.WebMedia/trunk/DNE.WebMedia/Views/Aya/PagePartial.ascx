@@ -15,9 +15,8 @@
     <h3>
         <%:item.Aya.sura %></h3>
     <%} %>
-    <%if (item.AyaNo == 1 && item.SuraNo != 9) {%>
-    <h2>
-        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
+    <%if (item.AyaNo == 1 && item.SuraNo != 9 && item.SuraNo != 1) {%>
+    <h2>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
     <%} %>
     <span class="aya">
         <%: item.Aya.TextFull %>
