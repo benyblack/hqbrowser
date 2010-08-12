@@ -109,6 +109,7 @@
     <Content Include="Scripts\jquery.hoverIntent.js" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\Page.aspx" />
+    <Content Include="Views\Aya\PagePartial.ascx" />
     <Content Include="Views\Aya\SuraAya.aspx" />
     <Content Include="Views\Aya\SuraDetail.aspx" />
     <Content Include="Content\th5.css" />

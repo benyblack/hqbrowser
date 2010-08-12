@@ -44,7 +44,11 @@ h1, h2, h3, h4 { text-transform:uppercase;font-family:champ, arial, verdana, san
 
 #sidebar { float:left;width:200px;padding:20px 0 0 0; }
 
-.sidepanel { width:188px;border:1px dotted #666;-moz-border-radius-bottomleft: 5px;-moz-border-radius-topright: 5px;-moz-border-radius-bottomright: 5px;padding:5px;margin:0 0 8px 0;color:#CCC; }
+.sidepanel { width:188px;border:1px dotted #666;
+             -moz-border-radius-bottomleft: 5px;-moz-border-radius-topright: 5px;-moz-border-radius-bottomright: 5px;
+             padding:5px;margin:0 0 8px 0;color:#CCC;
+             
+              }
 .sidepanel h4 { font-family:arial;font-size:13px; }
 .sidepanel p { padding:4px 0;font-size:11px;color:#CCC; }
 

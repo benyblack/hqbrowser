@@ -41,9 +41,35 @@ namespace DNE.WebMedia.Controllers {
 
         }
 
-        public ActionResult SuraDetail(int id) {
+        public ActionResult SuraDetail(int id, string type = "") {
             HQEntities db = new HQEntities();
-            return View(db.Aya.Include("Translate").Where(x => x.SuraId == id));
+            var sura = db.Aya.Include("Translate").Where(x => x.SuraId == id);
+            List<AyaSimple> ayas = new List<AyaSimple>();
+            foreach (Aya a in sura) {
+                ayas.Add(new AyaSimple(a));
+            }
+            if (type == "xml") {
+                return new XmlResult(ayas);
+
+            } else if (type == "json") {
+                return new JsonResult() { Data = ayas, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            }
+            return View(sura);
+
+        }
+
+        public ActionResult Translate(int suraid, int ayaid, string langid = "fa") {
+            HQEntities db = new HQEntities();
+            var a = db.Aya.Where(x => x.AyaId == ayaid && x.SuraId == suraid);
+            if (a.Count() > 0) {
+                var ax = a.First();
+                ax.Translate.Load();
+                string t = ax.Translate.Where(z => z.LangId == langid).First().Text;
+                return new JsonResult() { Data = t, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            }
+            return new JsonResult() { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
         }
 
@@ -57,16 +83,35 @@ namespace DNE.WebMedia.Controllers {
                 return new JsonResult() { Data = t, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             }
-            return new JsonResult() {Data = null,  JsonRequestBehavior= JsonRequestBehavior.AllowGet};
+            return new JsonResult() { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
         }
 
-        //GET /Page/{pageno}
-        public ActionResult Page(int pageno) {
+        //GET /Page/{pageno}.{type}
+        public ActionResult Page(int pageno, string type = "", string langid = "fa") {
             HQEntities db = new HQEntities();
-            var ps =   db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
+            var ps = db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
+            List<PageAyaSimple> psa = new List<PageAyaSimple>();
+            foreach (PageAya item in ps) {
+                psa.Add(item.ToSimple(langid));
+
+            }
+            if (type == "xml") {
+                return new XmlResult(psa);
+
+            } else if (type == "json") {
+                return new JsonResult() { Data = psa, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            }
+
             return View(ps);
         }
 
+        //GET /Page/{pageno}
+        public ActionResult PagePartial(int pageno) {
+            HQEntities db = new HQEntities();
+            var ps = db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
+            return View(ps);
+        }
     }
 }

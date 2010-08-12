@@ -11,7 +11,7 @@ namespace DNE.WebMedia.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
+            ViewData["Message"] = "Welcome";
 
             return View();
         }

@@ -5,21 +5,41 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace DNE.WebMedia
-{
+namespace DNE.WebMedia {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
-    {
-        public static void RegisterRoutes(RouteCollection routes)
-        {
+    public class MvcApplication : System.Web.HttpApplication {
+        public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+            "PagesApi", // Route name
+            "pages/{pageno}.{type}", // URL with parameters
+            new { controller = "Aya", action = "Page", pageno = 1 }
+        );
+            routes.MapRoute(
+             "Pages", // Route name
+             "pages/{pageno}", // URL with parameters
+             new { controller = "Aya", action = "Page", pageno = 1 }
+         );
 
             routes.MapRoute(
               "Page", // Route name
               "page/{pageno}", // URL with parameters
-              new { controller = "Aya", action = "Page",pageno =1 }
+              new { controller = "Aya", action = "Page", pageno = 1 }
+          );
+            routes.MapRoute(
+              "PagesPartial", // Route name
+              "pagespartial/{pageno}", // URL with parameters
+              new { controller = "Aya", action = "PagePartial", pageno = 1 }
+          );
+
+
+            routes.MapRoute(
+              "SuraApi", // Route name
+              "sura/{id}.{type}", // URL with parameters
+              new { controller = "Aya", action = "SuraDetail" }
           );
 
             routes.MapRoute(
@@ -28,17 +48,26 @@ namespace DNE.WebMedia
                new { controller = "Aya", action = "SuraDetail" }
            );
 
+
             routes.MapRoute(
          "SuraAyaService", // Route name
-         "sura/{sid}/aya/{aid}.{type}", // URL with parameters
+         "aya/{sid}/{aid}.{type}", // URL with parameters
          new { controller = "Aya", action = "SuraAya" }
      );
 
             routes.MapRoute(
              "SuraAya", // Route name
-             "sura/{sid}/aya/{aid}", // URL with parameters
+             "aya/{sid}/{aid}", // URL with parameters
              new { controller = "Aya", action = "SuraAya" }
          );
+
+            routes.MapRoute(
+                         "TranslateAya", // Route name
+                         "translate/{suraid}/{ayaid}/{langid}", // URL with parameters
+                         new { controller = "Aya", action = "Translate" }
+                     );
+
+
 
             routes.MapRoute(
                "Aya", // Route name
@@ -54,12 +83,11 @@ namespace DNE.WebMedia
 
         }
 
-        protected void Application_Start()
-        {
+        protected void Application_Start() {
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
-            // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+           // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
 
         }
     }
