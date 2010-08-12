@@ -1,11 +1,12 @@
 /* set our custom font family using @font-face */
 
+/*
 @font-face
 {
     font-family: champ;
     src: url("../fonts/CL.ttf") format("truetype");
 }
-
+*/
 
 *
 {
@@ -250,8 +251,6 @@ h1,h2
     display: none;
     padding: 10px;
     position: absolute;
-    direction: rtl;
-    text-align: right;
     z-index: 1000;
     -moz-border-radius: 4px;
     
@@ -273,4 +272,13 @@ h1,h2
     /*   IE       */
     border-radius: 4px 4px 4px 4px;
     behavior: url('/content/PIE.htc');
+}
+div.rtl
+{
+    direction: rtl;
+}
+div.ltr
+{
+    direction: ltr;
+    text-align: left;
 }

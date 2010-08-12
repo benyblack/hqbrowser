@@ -7,9 +7,7 @@
         <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>
     <link href="/Content/th5.css" rel="stylesheet" type="text/css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
-    <script src="/Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <!--[if IE]>
 <style type="text/css">#header h1{ font-size:32px; } .column { width:200px;border:0;overflow:hidden; }</style>
 <![endif]-->
@@ -17,12 +15,9 @@
 <body>
     <div id="container">
         <div id="header">
-            <h1>
-                Holy Quran Browser</h1>
-            <p>
-                An advanced tools for browsing and embedding original text,translations and Audio
-                of Holy Quran
-            </p>
+            <h1>Holy Quran Browser</h1>
+            <p>An advanced tools for browsing and embedding original text,translations and Audio
+                of Holy Quran </p>
             <%--<div id="logindisplay">
                 <% Html.RenderPartial("LogOnUserControl"); %>
             </div>--%>
@@ -33,60 +28,60 @@
                     <%: Html.ActionLink("Home", "Index", "Home")%></li>
                 <li>
                     <%: Html.ActionLink("About", "About", "Home")%></li>
-                <li><a href="/Page/">Pages</a></li>
-                <li><a href="">Audio</a></li>
-                
+                <li><a href="/Pages/">Pages</a></li>
+                <li><a href="#">Audio</a></li>
             </ul>
         </div>
         <div id="content">
             <div id="welcome">
-                
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-               
             </div>
-            <div class="column">
-                1
-            </div>
-            <div class="column">
-                2
-            </div>
-            <div class="column">
-                3
-            </div>
+            <div class="column">1 </div>
+            <div class="column">2 </div>
+            <div class="column">3 </div>
         </div>
         <div id="sidebar">
+            <%if (Html.ViewContext.RouteData.Values["controller"] == "Aya" &&
+                  Html.ViewContext.RouteData.Values["action"] == "Page") {  %>
+            <div class="sidepanel">
+                <h4>Option</h4>
+                <p>Translate: 
+                    <select id="cbotranslate" onchange="gotranslate(this)">
+                        <option value="fa">Persian</option>
+                        <option value="en">English</option>
+                        <option value="de">Germany</option>
+                        <option value="tr">Turkish</option>
+                    </select>
+                </p>
+            </div>
+            <% } %>
+
             <div class="sidepanel">
                 <h4>Permanent Links</h4>
                 <p>you can use this pattern to link to Quran pages<br />
-                <small>http://hq.eserve.ir/pages/{pageno}/</small><br />
-                Sample: <small>http://hq.eserve.ir/pages/100/</small>
-
-                </p>
+                    <small>http://hq.eserve.ir/pages/{pageno}/</small><br />
+                    Sample: <small>http://hq.eserve.ir/pages/100/</small> </p>
             </div>
             <div class="sidepanel">
                 <h4>Page API</h4>
                 <p>you can use this Rest API's for page in your application<br />
-                <small>http://hq.eserve.ir/pages/{pageno}.{type}</small><br />
-                Sample: <small>http://hq.eserve.ir/pages/100.json</small><br />
-                xml & json are now supported.<br />
-                For translate add langid querystring at end of url<br />
-                Sample: <a href="http://hq.eserve.ir/pages/100.json?langid=de"><small>http://hq.eserve.ir/pages/100.json?langid=de</small></a><br />
-                Supported Languages: Germany(de), English(en), Persian(fa), Turkish(tr)
-                </p>
+                    <small>http://hq.eserve.ir/pages/{pageno}.{type}</small><br />
+                    Sample: <small>http://hq.eserve.ir/pages/100.json</small><br />
+                    xml & json are now supported.<br />
+                    For translate add langid querystring at end of url<br />
+                    Sample: <a href="http://hq.eserve.ir/pages/100.json?langid=de"><small>http://hq.eserve.ir/pages/100.json?langid=de</small></a><br />
+                    Supported Languages: Germany(de), English(en), Persian(fa), Turkish(tr) </p>
             </div>
             <div class="sidepanel">
-            <h4>Aya Api</h4>
-            <p>API for Aya<br />
-            <small>http://hq.eserve.ir/aya/{surano}/{ayano}.{type}</small>
-            Sample: <small>http://hq.eserve.ir/100/1.xml</small><br />
-            xml & json are now supported.
-            </p>
+                <h4>Aya Api</h4>
+                <p>API for Aya<br />
+                    <small>http://hq.eserve.ir/aya/{surano}/{ayano}.{type}</small> Sample: <small>http://hq.eserve.ir/100/1.xml</small><br />
+                    xml & json are now supported. </p>
             </div>
-            
+        
         </div>
-        <div id="footer">
-            <a href="http://dne.ir/" target="_blank" class="button">Designed and Developed By DNE</a>
-        </div>
+        <div id="footer"><a href="http://dne.ir/" target="_blank" class="button">Designed and
+            Developed By DNE</a> </div>
     </div>
 </body>
 </html>

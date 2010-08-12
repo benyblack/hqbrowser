@@ -103,15 +103,19 @@ namespace DNE.WebMedia.Controllers {
                 return new JsonResult() { Data = psa, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             }
-
-            return View(ps);
+            return View(psa);
         }
 
         //GET /Page/{pageno}
-        public ActionResult PagePartial(int pageno) {
+        public ActionResult PagePartial(int pageno,string langid = "fa") {
             HQEntities db = new HQEntities();
             var ps = db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
-            return View(ps);
+            List<PageAyaSimple> psa = new List<PageAyaSimple>();
+            foreach (PageAya item in ps) {
+                psa.Add(item.ToSimple(langid));
+
+            }
+            return View(psa);
         }
     }
 }

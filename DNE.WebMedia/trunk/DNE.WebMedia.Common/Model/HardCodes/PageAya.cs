@@ -16,6 +16,9 @@ namespace DNE.WebMedia.Model {
             pas.LangId = langid;
             pas.Translate = this.Aya.Translate.Where(x => x.AyaId == AyaId && x.LangId == langid).First().Text;
             pas.TextFull = this.Aya.TextFull;
+            pas.SuraNo = this.SuraNo;
+            pas.AyaNo = this.AyaNo;
+            pas.Sura = this.Aya.sura;
             return pas;
         }
         
@@ -29,5 +32,7 @@ namespace DNE.WebMedia.Model {
         public string Sura { get; set; }
         public string Translate { get; set; }
         public string LangId { get; set; }
+        public int AyaNo { get; set; }
+        public int SuraNo { get; set; }
     }
 }
