@@ -16,6 +16,11 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region EDM Relationship Metadata
+
+[assembly: EdmRelationshipAttribute("HQModel", "FK_PageAya_Aya", "Aya", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DNE.WebMedia.Client.Aya), "PageAya", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DNE.WebMedia.Client.PageAya), true)]
+
+#endregion
 
 namespace DNE.WebMedia.Client
 {
@@ -128,6 +133,22 @@ namespace DNE.WebMedia.Client
             }
         }
         private ObjectSet<Aya> _Ayas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PageAya> PageAyas
+        {
+            get
+            {
+                if ((_PageAyas == null))
+                {
+                    _PageAyas = base.CreateObjectSet<PageAya>("PageAyas");
+                }
+                return _PageAyas;
+            }
+        }
+        private ObjectSet<PageAya> _PageAyas;
 
         #endregion
         #region AddTo Methods
@@ -162,6 +183,14 @@ namespace DNE.WebMedia.Client
         public void AddToAyas(Aya aya)
         {
             base.AddObject("Ayas", aya);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PageAyas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPageAyas(PageAya pageAya)
+        {
+            base.AddObject("PageAyas", pageAya);
         }
 
         #endregion
@@ -393,6 +422,47 @@ namespace DNE.WebMedia.Client
     
             return base.ExecuteFunction("UpdateAyehText", idParameter, ayehParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pageId">No Metadata Documentation available.</param>
+        /// <param name="suraNo">No Metadata Documentation available.</param>
+        /// <param name="ayaNo">No Metadata Documentation available.</param>
+        public int InsertPageAya(Nullable<global::System.Int32> pageId, Nullable<global::System.Int32> suraNo, Nullable<global::System.Int32> ayaNo)
+        {
+            ObjectParameter pageIdParameter;
+            if (pageId.HasValue)
+            {
+                pageIdParameter = new ObjectParameter("PageId", pageId);
+            }
+            else
+            {
+                pageIdParameter = new ObjectParameter("PageId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter suraNoParameter;
+            if (suraNo.HasValue)
+            {
+                suraNoParameter = new ObjectParameter("SuraNo", suraNo);
+            }
+            else
+            {
+                suraNoParameter = new ObjectParameter("SuraNo", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter ayaNoParameter;
+            if (ayaNo.HasValue)
+            {
+                ayaNoParameter = new ObjectParameter("AyaNo", ayaNo);
+            }
+            else
+            {
+                ayaNoParameter = new ObjectParameter("AyaNo", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("InsertPageAya", pageIdParameter, suraNoParameter, ayaNoParameter);
+        }
 
         #endregion
     }
@@ -585,6 +655,47 @@ namespace DNE.WebMedia.Client
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HQModel", "FK_PageAya_Aya", "PageAya")]
+        public PageAya PageAya
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PageAya>("HQModel.FK_PageAya_Aya", "PageAya").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PageAya>("HQModel.FK_PageAya_Aya", "PageAya").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PageAya> PageAyaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PageAya>("HQModel.FK_PageAya_Aya", "PageAya");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PageAya>("HQModel.FK_PageAya_Aya", "PageAya", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -960,6 +1071,180 @@ namespace DNE.WebMedia.Client
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HQModel", Name="PageAya")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PageAya : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PageAya object.
+        /// </summary>
+        /// <param name="ayaId">Initial value of the AyaId property.</param>
+        /// <param name="pageId">Initial value of the PageId property.</param>
+        /// <param name="suraNo">Initial value of the SuraNo property.</param>
+        /// <param name="ayaNo">Initial value of the AyaNo property.</param>
+        public static PageAya CreatePageAya(global::System.Int32 ayaId, global::System.Int32 pageId, global::System.Int32 suraNo, global::System.Int32 ayaNo)
+        {
+            PageAya pageAya = new PageAya();
+            pageAya.AyaId = ayaId;
+            pageAya.PageId = pageId;
+            pageAya.SuraNo = suraNo;
+            pageAya.AyaNo = ayaNo;
+            return pageAya;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AyaId
+        {
+            get
+            {
+                return _AyaId;
+            }
+            set
+            {
+                if (_AyaId != value)
+                {
+                    OnAyaIdChanging(value);
+                    ReportPropertyChanging("AyaId");
+                    _AyaId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AyaId");
+                    OnAyaIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AyaId;
+        partial void OnAyaIdChanging(global::System.Int32 value);
+        partial void OnAyaIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PageId
+        {
+            get
+            {
+                return _PageId;
+            }
+            set
+            {
+                OnPageIdChanging(value);
+                ReportPropertyChanging("PageId");
+                _PageId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PageId");
+                OnPageIdChanged();
+            }
+        }
+        private global::System.Int32 _PageId;
+        partial void OnPageIdChanging(global::System.Int32 value);
+        partial void OnPageIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SuraNo
+        {
+            get
+            {
+                return _SuraNo;
+            }
+            set
+            {
+                OnSuraNoChanging(value);
+                ReportPropertyChanging("SuraNo");
+                _SuraNo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SuraNo");
+                OnSuraNoChanged();
+            }
+        }
+        private global::System.Int32 _SuraNo;
+        partial void OnSuraNoChanging(global::System.Int32 value);
+        partial void OnSuraNoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AyaNo
+        {
+            get
+            {
+                return _AyaNo;
+            }
+            set
+            {
+                OnAyaNoChanging(value);
+                ReportPropertyChanging("AyaNo");
+                _AyaNo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AyaNo");
+                OnAyaNoChanged();
+            }
+        }
+        private global::System.Int32 _AyaNo;
+        partial void OnAyaNoChanging(global::System.Int32 value);
+        partial void OnAyaNoChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HQModel", "FK_PageAya_Aya", "Aya")]
+        public Aya Aya
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Aya>("HQModel.FK_PageAya_Aya", "Aya").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Aya>("HQModel.FK_PageAya_Aya", "Aya").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Aya> AyaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Aya>("HQModel.FK_PageAya_Aya", "Aya");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Aya>("HQModel.FK_PageAya_Aya", "Aya", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="HQModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -975,7 +1260,8 @@ namespace DNE.WebMedia.Client
         /// <param name="screenName">Initial value of the ScreenName property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String userName, global::System.String screenName, global::System.String email, global::System.String password)
+        /// <param name="openId">Initial value of the OpenId property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String userName, global::System.String screenName, global::System.String email, global::System.String password, global::System.String openId)
         {
             User user = new User();
             user.Id = id;
@@ -983,6 +1269,7 @@ namespace DNE.WebMedia.Client
             user.ScreenName = screenName;
             user.Email = email;
             user.Password = password;
+            user.OpenId = openId;
             return user;
         }
 
@@ -1111,6 +1398,30 @@ namespace DNE.WebMedia.Client
         private global::System.String _Password;
         partial void OnPasswordChanging(global::System.String value);
         partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OpenId
+        {
+            get
+            {
+                return _OpenId;
+            }
+            set
+            {
+                OnOpenIdChanging(value);
+                ReportPropertyChanging("OpenId");
+                _OpenId = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OpenId");
+                OnOpenIdChanged();
+            }
+        }
+        private global::System.String _OpenId;
+        partial void OnOpenIdChanging(global::System.String value);
+        partial void OnOpenIdChanged();
 
         #endregion
     

@@ -39,11 +39,13 @@
 			
 			font-family:Tahoma;
 			font-size: 9pt;
+			max-width:300px;
+			text-align: justify;
 			
 			background-color:#5a85a5;
 			color:white;
 			min-height:30px;
-			padding:10px 20px 10px 65px;
+			line-height:130%;
 			opacity:0.9;
 		}
 	</style>

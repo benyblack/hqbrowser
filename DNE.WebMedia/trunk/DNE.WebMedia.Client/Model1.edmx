@@ -9,7 +9,16 @@
           <EntitySet Name="Aya" EntityType="HQModel.Store.Aya" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Media" EntityType="HQModel.Store.Media" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MediaInfo" EntityType="HQModel.Store.MediaInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PageAya" EntityType="HQModel.Store.PageAya" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="HQModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Aya_Aya" Association="HQModel.Store.FK_Aya_Aya">
+            <End Role="Aya" EntitySet="Aya" />
+            <End Role="Aya1" EntitySet="Aya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageAya_Aya" Association="HQModel.Store.FK_PageAya_Aya">
+            <End Role="Aya" EntitySet="Aya" />
+            <End Role="PageAya" EntitySet="PageAya" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Aya">
           <Key>
@@ -44,6 +53,15 @@
           <Property Name="Duration" Type="time" Nullable="false" />
           <Property Name="Lenght" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="PageAya">
+          <Key>
+            <PropertyRef Name="AyaId" />
+          </Key>
+          <Property Name="AyaId" Type="int" Nullable="false" />
+          <Property Name="PageId" Type="int" Nullable="false" />
+          <Property Name="SuraNo" Type="int" Nullable="false" />
+          <Property Name="AyaNo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -53,7 +71,32 @@
           <Property Name="ScreenName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="OpenId" Type="nvarchar" Nullable="false" MaxLength="500" />
         </EntityType>
+        <Association Name="FK_Aya_Aya">
+          <End Role="Aya" Type="HQModel.Store.Aya" Multiplicity="1" />
+          <End Role="Aya1" Type="HQModel.Store.Aya" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Aya">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Aya1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageAya_Aya">
+          <End Role="Aya" Type="HQModel.Store.Aya" Multiplicity="1" />
+          <End Role="PageAya" Type="HQModel.Store.PageAya" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Aya">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageAya">
+              <PropertyRef Name="AyaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Insert_Translate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AyaId" Type="int" Mode="In" />
           <Parameter Name="LangId" Type="nvarchar" Mode="In" />
@@ -66,6 +109,11 @@
           <Parameter Name="Sooreh" Type="nvarchar" Mode="In" />
           <Parameter Name="ayehId" Type="int" Mode="In" />
           <Parameter Name="Ayeh" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="InsertPageAya" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PageId" Type="int" Mode="In" />
+          <Parameter Name="SuraNo" Type="int" Mode="In" />
+          <Parameter Name="AyaNo" Type="int" Mode="In" />
         </Function>
         <Function Name="Update_Ayeh_Ayeh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -117,6 +165,16 @@
             <Parameter Name="Ayeh" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Ayas" EntityType="HQModel.Aya" />
+          <EntitySet Name="PageAyas" EntityType="HQModel.PageAya" />
+          <AssociationSet Name="FK_PageAya_Aya" Association="HQModel.FK_PageAya_Aya">
+            <End Role="Aya" EntitySet="Ayas" />
+            <End Role="PageAya" EntitySet="PageAyas" />
+          </AssociationSet>
+          <FunctionImport Name="InsertPageAya">
+            <Parameter Name="PageId" Mode="In" Type="Int32" />
+            <Parameter Name="SuraNo" Mode="In" Type="Int32" />
+            <Parameter Name="AyaNo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Medium">
           <Key>
@@ -149,6 +207,7 @@
           <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="OpenId" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Aya">
           <Key>
@@ -160,7 +219,30 @@
           <Property Type="String" Name="sura" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TextFull" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PageAya" Relationship="HQModel.FK_PageAya_Aya" FromRole="Aya" ToRole="PageAya" />
         </EntityType>
+        <EntityType Name="PageAya">
+          <Key>
+            <PropertyRef Name="AyaId" />
+          </Key>
+          <Property Type="Int32" Name="AyaId" Nullable="false" />
+          <Property Type="Int32" Name="PageId" Nullable="false" />
+          <Property Type="Int32" Name="SuraNo" Nullable="false" />
+          <Property Type="Int32" Name="AyaNo" Nullable="false" />
+          <NavigationProperty Name="Aya" Relationship="HQModel.FK_PageAya_Aya" FromRole="PageAya" ToRole="Aya" />
+        </EntityType>
+        <Association Name="FK_PageAya_Aya">
+          <End Type="HQModel.Aya" Role="Aya" Multiplicity="1" />
+          <End Type="HQModel.PageAya" Role="PageAya" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Aya">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageAya">
+              <PropertyRef Name="AyaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -184,7 +266,8 @@
             <ScalarProperty Name="Lenght" ColumnName="Lenght" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="HQModel.User"><MappingFragment StoreEntitySet="User">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="UserName" ColumnName="UserName" />
             <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
             <ScalarProperty Name="Email" ColumnName="Email" />
@@ -207,6 +290,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PageAyas">
+            <EntityTypeMapping TypeName="HQModel.PageAya">
+              <MappingFragment StoreEntitySet="PageAya">
+                <ScalarProperty Name="AyaNo" ColumnName="AyaNo" />
+                <ScalarProperty Name="SuraNo" ColumnName="SuraNo" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="AyaId" ColumnName="AyaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertPageAya" FunctionName="HQModel.Store.InsertPageAya" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -232,6 +326,11 @@
         <EntityTypeShape EntityType="HQModel.MediaInfo" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9802864583333326" IsExpanded="true" />
         <EntityTypeShape EntityType="HQModel.User" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="HQModel.Aya" Width="1.5" PointX="3.375" PointY="4.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="HQModel.PageAya" Width="1.5" PointX="5.625" PointY="5.125" Height="1.9802864583333335" />
+        <AssociationConnector Association="HQModel.FK_PageAya_Aya" >
+          <ConnectorPoint PointX="4.875" PointY="6.1151432291666667" />
+          <ConnectorPoint PointX="5.625" PointY="6.1151432291666667" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

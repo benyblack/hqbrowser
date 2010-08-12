@@ -29,7 +29,7 @@ namespace DNE.WebMedia.Client {
 			//        +  "|" + s.Attribute("index").Value + "|" + s.Attribute("text").Value;
 
 			//string[] s = File.ReadAllLines(@"d:\turkish-ozturk.txt");
-			string[] s = File.ReadAllLines(@"d:\quran-simple-clean.txt");
+			string[] s = File.ReadAllLines(@"d:\yusufali.txt");
 
 			string salam = "";
 			HQEntities db = new HQEntities();
@@ -40,8 +40,8 @@ namespace DNE.WebMedia.Client {
 				//Ayeh a = new Ayeh() { SoorehId=int.Parse(z[0]),Sooreh=z[1],
 				//    AyehId = int.Parse(z[2]),Ayeh1 = z[3],Persian="",English="" };
 				////db.AddToAyehs(a);
-				//db.InsertTranslate(i, "de", "German", "Amir Zaidan", s[i - 1]);
-				db.UpdateAyehText(i, s[i - 1]);
+				db.InsertTranslate(i, "en", "English", "Abdullah Yusufali", s[i - 1]);
+				//db.UpdateAyehText(i, s[i - 1]);
 				lblCount.Text = i.ToString();
 				lblCount.Refresh();
 				Application.DoEvents();
@@ -66,7 +66,8 @@ namespace DNE.WebMedia.Client {
 		}
 
 		private void button3_Click(object sender, EventArgs e) {
-			string s = File.ReadAllText("quran.txt");
+            HQEntities db = new HQEntities();
+			string s = File.ReadAllText(@"d:\quran.txt");
 			List<string> psa = new List<string>(); //page,sura,aya
 			SortedList<int, string> lstSura = new SortedList<int, string>();
 
@@ -107,12 +108,21 @@ namespace DNE.WebMedia.Client {
 						if (psa.Contains(temppsa))
 							temppsa = string.Format("{0},{1},{2}", i.ToString(), lastsuraid.ToString(), (int.Parse(m.Groups["ayanum"].Value) + 1).ToString());
 						psa.Add(temppsa);
-
+                        string[] fff = Regex.Split(temppsa, ",");
+                       db.InsertPageAya(i,lastsuraid,int.Parse(fff[2]));
 					}
 
 
 				}
 				writetext(stats, i.ToString() + ".txt");
+				string[] xa = Regex.Split(stats, "\r\n");
+				List<string> xaa = new List<string>();
+				for (int h = 0; h < xa.Length; h++) {
+					if (xa[h].Trim()!="")
+					 xaa.Add( i.ToString() + "," + xa[h]);
+					
+				}
+				File.AppendAllLines(@"D:\x.txt", xaa.ToArray());
 				lblCount.Text = i.ToString();
 				lblCount.Refresh();
 				Application.DoEvents();
@@ -121,19 +131,19 @@ namespace DNE.WebMedia.Client {
 			}
 			//}
 			string[] psaar = psa.ToArray();
-			File.WriteAllLines(@"D:\Projects\DNE.WebMedia\DNE.WebMedia.Client\bin\Debug\list.txt", psaar);
+			File.WriteAllLines(@"D:\Documents\Visual Studio 2010\Projects\DNE.WebMedia\DNE.WebMedia\trunk\DNE.WebMedia.Client\bin\Debug\list.txt", psaar);
 			string xvc = "";
 			foreach (KeyValuePair<int, string> item in lstSura) {
 				xvc += string.Format("{0},{1}\r\n", item.Key, item.Value);
 
 
 			}
-			File.WriteAllText(@"D:\Projects\DNE.WebMedia\DNE.WebMedia.Client\bin\Debug\fehrest.txt", xvc);
+			File.WriteAllText(@"D:\Documents\Visual Studio 2010\Projects\DNE.WebMedia\DNE.WebMedia\trunk\DNE.WebMedia.Client\bin\Debug\fehrest.txt", xvc);
 
 		}
 
 		void writetext(string s, string path) {
-			File.WriteAllText(Path.Combine(@"D:\Projects\DNE.WebMedia\DNE.WebMedia.Client\bin\Debug\Pages", path), s);
+			File.WriteAllText(Path.Combine(@"D:\Documents\Visual Studio 2010\Projects\DNE.WebMedia\DNE.WebMedia\trunk\DNE.WebMedia.Client\bin\Debug\Pages", path), s);
 
 		}
 

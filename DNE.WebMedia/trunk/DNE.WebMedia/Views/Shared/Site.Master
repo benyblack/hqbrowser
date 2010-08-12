@@ -3,41 +3,90 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <link href="/Content/th5.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
+    <!--[if IE]>
+<style type="text/css">#header h1{ font-size:32px; } .column { width:200px;border:0;overflow:hidden; }</style>
+<![endif]-->
 </head>
-
 <body>
-    <div class="page">
-
+    <div id="container">
         <div id="header">
-            <div id="title">
-                <h1>Holy Quran Browser</h1>
-            </div>
-              
-            <div id="logindisplay">
+            <h1>
+                Holy Quran Browser</h1>
+            <p>
+                An advanced tools for browsing and embedding original text,translations and Audio
+                of Holy Quran
+            </p>
+            <%--<div id="logindisplay">
                 <% Html.RenderPartial("LogOnUserControl"); %>
-            </div> 
-            
-            <div id="menucontainer">
-            
-                <ul id="menu">              
-                    <li><%: Html.ActionLink("Home", "Index", "Home")%></li>
-                    <li><%: Html.ActionLink("About", "About", "Home")%></li>
-                </ul>
-            
+            </div>--%>
+        </div>
+        <div id="nav">
+            <ul>
+                <li>
+                    <%: Html.ActionLink("Home", "Index", "Home")%></li>
+                <li>
+                    <%: Html.ActionLink("About", "About", "Home")%></li>
+                <li><a href="/Page/1/">Pages</a></li>
+                <li><a href="">Audio</a></li>
+                <li><a href="">Nav Link</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <div id="welcome">
+                <h2>
+                    Welcome to your site</h2>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                <p align="right">
+                    <a href="" class="button">Read more about site</a>
+                </p>
+            </div>
+            <div class="column">
+                1
+            </div>
+            <div class="column">
+                2
+            </div>
+            <div class="column">
+                3
             </div>
         </div>
-
-        <div id="main">
-            <div id="leftsidebar"></div>
-            <div id="contentbody">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <div id="sidebar">
+            <div class="sidepanel">
+                <h4>
+                    Sidepanel Title</h4>
+                <p>
+                    Welcome to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in elit
+                    eu lacus blandit feugiat et id justo. Praesent urna massa.</p>
             </div>
-            <div id="footer">
+            <div class="sidepanel">
+                <h4>
+                    Sidepanel Title</h4>
+                <p>
+                    Welcome to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in elit
+                    eu lacus blandit feugiat et id justo. Praesent urna massa.</p>
             </div>
+            <div class="sidepanel">
+                <h4>
+                    Sidepanel Title</h4>
+                <p>
+                    Welcome to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in elit
+                    eu lacus blandit feugiat et id justo. Praesent urna massa.</p>
+            </div>
+            <div class="sidepanel">
+                <h4>
+                    Sidepanel Title</h4>
+                <p>
+                    Welcome to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in elit
+                    eu lacus blandit feugiat et id justo. Praesent urna massa.</p>
+            </div>
+        </div>
+        <div id="footer">
+            <a href="http://dne.ir/" target="_blank" class="button">Designed and Developed By DNE</a>
         </div>
     </div>
 </body>

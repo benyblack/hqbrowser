@@ -81,10 +81,37 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="img\bodybg.png" />
+    <Content Include="img\cluetip\arrowdown.gif" />
+    <Content Include="img\cluetip\arrowleft.gif" />
+    <Content Include="img\cluetip\arrowright.gif" />
+    <Content Include="img\cluetip\arrowup.gif" />
+    <Content Include="img\cluetip\bl.gif" />
+    <Content Include="img\cluetip\bl.png" />
+    <Content Include="img\cluetip\br.gif" />
+    <Content Include="img\cluetip\br.png" />
+    <Content Include="img\cluetip\darrowdown.gif" />
+    <Content Include="img\cluetip\darrowleft.gif" />
+    <Content Include="img\cluetip\darrowright.gif" />
+    <Content Include="img\cluetip\darrowup.gif" />
+    <Content Include="img\cluetip\itunes.png" />
+    <Content Include="img\cluetip\rarrowdown.gif" />
+    <Content Include="img\cluetip\rarrowleft.gif" />
+    <Content Include="img\cluetip\rarrowright.gif" />
+    <Content Include="img\cluetip\rarrowup.gif" />
+    <Content Include="img\cluetip\tl.gif" />
+    <Content Include="img\cluetip\tl.png" />
+    <Content Include="img\cluetip\tr.gif" />
+    <Content Include="img\cluetip\tr.png" />
+    <Content Include="img\cluetip\wait.gif" />
+    <Content Include="Scripts\jquery.bgiframe.min.js" />
+    <Content Include="Scripts\jquery.cluetip.min.js" />
+    <Content Include="Scripts\jquery.hoverIntent.js" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\Page.aspx" />
     <Content Include="Views\Aya\SuraAya.aspx" />
     <Content Include="Views\Aya\SuraDetail.aspx" />
+    <Content Include="Content\th5.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -115,7 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="img\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DNE.WebMedia.Common\DNE.WebMedia.Common.csproj">

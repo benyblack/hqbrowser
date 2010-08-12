@@ -61,6 +61,7 @@ namespace DNE.WebMedia.Controllers {
 
         }
 
+        //GET /Page/{pageno}
         public ActionResult Page(int pageno) {
             HQEntities db = new HQEntities();
             var ps =   db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
