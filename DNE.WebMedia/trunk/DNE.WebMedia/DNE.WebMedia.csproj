@@ -83,6 +83,10 @@
     <Content Include="Content\ie-css3.htc" />
     <Content Include="Content\PIE.htc" />
     <Content Include="Global.asax" />
+    <Content Include="img\1-0.gif" />
+    <Content Include="img\1.gif" />
+    <Content Include="img\snail.gif" />
+    <Content Include="img\ajax-loader.gif" />
     <Content Include="img\bodybg.png" />
     <Content Include="img\cluetip\arrowdown.gif" />
     <Content Include="img\cluetip\arrowleft.gif" />

@@ -13,6 +13,7 @@
     <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
         Prev</a>
     <%} %>
+        <span id="loading" ><img class="loading" alt="" src="/img/1.gif" /></span>
 </p>
 <div style="direction: rtl; text-align: justify;">
     <% foreach (var item in Model) { %>
@@ -44,6 +45,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $("#cbotranslate").val("<%=langid%>");
+    $("#loading").hide();
 });
 function gotranslate(ctl) {
     gopage(<%=pageno%>,ctl.value);
