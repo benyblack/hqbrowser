@@ -8,7 +8,10 @@
 <%Html.RenderPartial("PagePartial", Model); %>
     </div>
     <script type="text/javascript">
-        $(document).ready(dotooltip());
+        $(document).ready(
+        dotooltip()
+        
+        );
 
         function dotooltip() {
             $(".aya").hover(

@@ -116,6 +116,7 @@
     <Content Include="Scripts\jquery.cluetip.min.js" />
     <Content Include="Scripts\jquery.hoverIntent.js" />
     <Content Include="Scripts\jquery.jplayer.min.js" />
+    <Content Include="Scripts\PagePartial.js" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\Page.aspx" />
     <Content Include="Views\Aya\PagePartial.ascx" />
