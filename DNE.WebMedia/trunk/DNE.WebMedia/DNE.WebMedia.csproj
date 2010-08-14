@@ -80,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\test.mp3" />
     <Content Include="Content\ie-css3.htc" />
     <Content Include="Content\PIE.htc" />
     <Content Include="Global.asax" />
@@ -110,9 +111,11 @@
     <Content Include="img\cluetip\tr.gif" />
     <Content Include="img\cluetip\tr.png" />
     <Content Include="img\cluetip\wait.gif" />
+    <Content Include="Scripts\Jplayer.swf" />
     <Content Include="Scripts\jquery.bgiframe.min.js" />
     <Content Include="Scripts\jquery.cluetip.min.js" />
     <Content Include="Scripts\jquery.hoverIntent.js" />
+    <Content Include="Scripts\jquery.jplayer.min.js" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\Page.aspx" />
     <Content Include="Views\Aya\PagePartial.ascx" />

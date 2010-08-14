@@ -4,49 +4,45 @@
    if (Request["langid"] != null)
        langid = Request["langid"].ToString();
 %>
-<p align="left">
-    <%if (pageno < 604) { %>
-    <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>
-        Next</a>
-    <%} %>
-    <%if (pageno > 1) { %>
-    <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
-        Prev</a>
-    <%} %>
-        <span id="loading" ><img class="loading" alt="" src="/img/1.gif" /></span>
+<p align="left"><%if (pageno < 604) { %> <a href='/Pages/<%=(pageno + 1) %>' class="button"
+    onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>Next</a> <%} %>
+    <%if (pageno > 1) { %> <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
+        Prev</a> <%} %> <span id="loading"><img class="loading" alt="" src="/img/1.gif" /></span>
 </p>
-<div style="direction: rtl; text-align: justify;">
-    <% foreach (var item in Model) { %>
+<div style="direction: rtl; text-align: justify;"><% foreach (var item in Model) { %>
     <%if (item.AyaNo == 1) {%>
-    <h3>
-        <%:item.Sura %></h3>
-    <%} %>
-    <%if (item.AyaNo == 1 && item.SuraNo != 9 && item.SuraNo != 1) {%>
+    <h3><%:item.Sura %></h3>
+    <%} %> <%if (item.AyaNo == 1 && item.SuraNo != 9 && item.SuraNo != 1) {%>
     <h2>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
-    <%} %>
-    <span class="aya">
-        <%: item.TextFull %>
-        <div class='tooltip <%:langid=="fa"?"rtl":"ltr" %>'>
-            <%: item.Translate%>
-        </div>
-    </span>(<%: item.AyaNo%>)
-    <% } %>
+    <%} %> 
+    <span class="aya" id='<%=item.AyaId %>aya'><%: item.TextFull %>
+        <div class='tooltip <%:langid=="fa"?"rtl":"ltr" %>'><%: item.Translate%> </div>
+    </span>
+    (<%: item.AyaNo%>) <% } %> 
 </div>
-<p align="left">
-    <%if (pageno < 604) { %>
-    <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>
-        Next</a>
-    <%} %>
-    <%if (pageno > 1) { %>
-    <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
-        Prev</a>
-    <%} %>
-</p>
+<p align="left"><%if (pageno < 604) { %> <a href='/Pages/<%=(pageno + 1) %>' class="button"
+    onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>Next</a> <%} %>
+    <%if (pageno > 1) { %> <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
+        Prev</a> <%} %> </p>
+<div id="jpId"></div>
 <script type="text/javascript">
 $(document).ready(function(){
     $("#cbotranslate").val("<%=langid%>");
     $("#loading").hide();
+    $(".aya").bind("click",function(){
+        var isp = $("#jpId").jPlayer( "getData", "diag.isPlaying" ); 
+        if (isp)
+            $("#jpId").jPlayer("pause");
+        else{
+            $("#jpId").jPlayer("setFile", "/content/test.mp3"); 
+            $("#jpId").jPlayer("play");
+        }
+        
+    });
+    $("#jpId").jPlayer();
+
 });
+
 function gotranslate(ctl) {
     gopage(<%=pageno%>,ctl.value);
 }
