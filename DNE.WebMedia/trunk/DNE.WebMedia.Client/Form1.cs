@@ -19,6 +19,11 @@ namespace DNE.WebMedia.Client {
 		}
 
 		private void button1_Click(object sender, EventArgs e) {
+
+            Dictionary<int ,dynamic > ppp = new Dictionary<int,dynamic>();
+            
+
+
 			//var x = (new XmlSerializer()).Deserialize("d:\1.xml")
 			//XmlDocument xdoc = new XmlDocument();
 			//xdoc.Load(@"d:\1.xml");
