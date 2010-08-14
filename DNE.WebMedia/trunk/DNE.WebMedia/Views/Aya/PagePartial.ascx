@@ -13,8 +13,8 @@
     <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
         Prev</a>
     <%} %>
-    <span id="loading">
-        <img class="loading" alt="" src="/img/1.gif" /></span><span id="play-info"></span>
+    <span id="loading" style="">
+        <img class="loading" alt="" src="/img/1.gif" style="display:inline;"/></span><span id="play-info"></span>
 </p>
 <div style="direction: rtl; text-align: justify;">
     <% foreach (var item in Model) { %>
@@ -50,7 +50,7 @@
 var jpPlayInfo = $("#play-info");
 $(document).ready(function(){
     $("#cbotranslate").val("<%=langid%>");
-    $("#loading").hide();
+    $("#loading").hide(); 
     $(".aya").bind("click",function(){
         var isp = $("#jpId").jPlayer( "getData", "diag.isPlaying" ); 
         var mp3base = 'http://www.everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/';

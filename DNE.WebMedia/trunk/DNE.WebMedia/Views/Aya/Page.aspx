@@ -26,7 +26,7 @@
         }
 
         function gopage(pageno, langid) {
-            $("#loading").show();
+            $("#loading").show();  
             var url = "/PagesPartial/" + pageno;
             if (langid != "")
                 url += "?langid=" + langid;
@@ -34,7 +34,7 @@
             $.get(url, function (data) {
                 $("#pagecontent").html(data);
                 dotooltip();
-                $("#loading").hide();
+                $("#loading").hide();  
             });
         }
 

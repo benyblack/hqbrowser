@@ -282,7 +282,9 @@ div.ltr
     direction: ltr;
     text-align: left;
 }
-img.loading
+.loading
 {
+  display: inline;
   
+ 
 }
