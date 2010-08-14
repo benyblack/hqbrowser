@@ -86,8 +86,8 @@
             </div>
         
         </div>
-        <div id="footer"><a href="http://behnamonline.net/" target="_blank" class="button">Designed and
-            Developed By Behnam</a> </div>
+        <div id="footer"><a href="http://behnamonline.net/" title="Behnam Yousefi, Mahdi Saffari, Alireza Zohrpeyma" target="_blank" class="button">Designed and
+            Developed By DNE Group</a> </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
