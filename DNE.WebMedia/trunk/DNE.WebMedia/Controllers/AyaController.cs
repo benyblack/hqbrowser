@@ -41,12 +41,12 @@ namespace DNE.WebMedia.Controllers {
 
         }
 
-        public ActionResult SuraDetail(int id, string type = "") {
+        public ActionResult SuraDetail(int id, string type = "", string langid = "fa") {
             HQEntities db = new HQEntities();
             var sura = db.Aya.Include("Translate").Where(x => x.SuraId == id);
             List<AyaSimple> ayas = new List<AyaSimple>();
             foreach (Aya a in sura) {
-                ayas.Add(new AyaSimple(a));
+                ayas.Add(new AyaSimple(a,langid));
             }
             if (type == "xml") {
                 return new XmlResult(ayas);
@@ -55,7 +55,7 @@ namespace DNE.WebMedia.Controllers {
                 return new JsonResult() { Data = ayas, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             }
-            return View(sura);
+            return View(ayas);
 
         }
 

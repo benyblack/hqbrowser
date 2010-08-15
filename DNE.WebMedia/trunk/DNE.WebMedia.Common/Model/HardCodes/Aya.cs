@@ -232,13 +232,14 @@ public partial class Aya:ICloneable
 
         public AyaSimple(){}
 
-        public AyaSimple(Aya a)
+        public AyaSimple(Aya a, string langid = "fa")
         {
             this.SuraId = a.SuraId;
             this.Sura = a.sura;
             this.AyaId = a.AyaId;
             this.Text = a.Text;
             this.TextFull = a.TextFull;
+            this.Translate = a.Translate.Where(x => x.AyaId == AyaId && x.LangId == langid).First().Text;
             
         }
 
@@ -247,7 +248,7 @@ public partial class Aya:ICloneable
         public string Sura { get; set; }
         public string Text { get; set; }
         public string TextFull { get; set; }
-
+        public string Translate { get; set; }
 
     }
  }
