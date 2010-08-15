@@ -116,6 +116,7 @@
     <Content Include="Scripts\jquery-jtemplates.js" />
     <Content Include="Scripts\jquery.jplayer.min.js" />
     <Content Include="Scripts\PagePartial.js" />
+    <Content Include="Scripts\sura.js" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\Page.aspx" />
     <Content Include="Views\Aya\PagePartial.ascx" />
@@ -174,7 +175,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1323</DevelopmentServerPort>
+          <DevelopmentServerPort>4987</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

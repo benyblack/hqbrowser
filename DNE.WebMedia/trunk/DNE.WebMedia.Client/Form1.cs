@@ -11,6 +11,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace DNE.WebMedia.Client {
 	public partial class Form1 : Form {
@@ -152,5 +153,36 @@ namespace DNE.WebMedia.Client {
 
 		}
 
+        private void button4_Click(object sender, EventArgs e) {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                string[] ls = File.ReadAllLines(ofd.FileName);
+                Newtonsoft.Json.JsonSerializer js = new Newtonsoft.Json.JsonSerializer();
+                string pat = @"{ name: '{0}', id: {1}, from: {2}, to: {3} }";
+                List<sura> sc = new List<sura>();
+                for (int i = 1; i < ls.Length; i++) {
+                    string[] d = Regex.Split(ls[i],",");
+                    sc.Add(new sura() { name = d[0], 
+                        id = int.Parse(d[1]), 
+                        from = int.Parse(d[2]) ,
+                        to = int.Parse(d[3])
+                    });
+                }
+                StringWriter ms = new StringWriter();
+                js.Serialize(ms,sc.ToArray());
+                txtout.Text =Regex.Replace( ms.ToString(),"},","},\r\n") ;
+
+            }
+        }
+
 	}
+
+    public class sura {
+        public string name { get; set; }
+        public int id { get; set; }
+        public int from { get; set; }
+        public int to { get; set; }
+
+
+    }
 }

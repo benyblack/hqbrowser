@@ -29,14 +29,23 @@ a.x
     font-family: Tahoma;
     font-size: 9pt;
 }
+#tem
+{
+    visibility:hidden;
+}
+        #te2
+        {
+            height: 265px;
+            width: 376px;
+        }
     </style>
-    <script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
     <script src="/Scripts/jquery-jtemplates.js" type="text/javascript"></script>
 </head>
 <body>
     <!-- HTML structures -->
     <div id="actions">
-        <a class="prev">&laquo; Back</a> <a class="next">More pictures &raquo;</a>
+        <a class="prev">&laquo; Back</a> <a class="next">Forward &raquo;</a>
     </div>
     <!-- root element for scrollable -->
     <div class="scrollable vertical">
@@ -67,68 +76,33 @@ a.x
         </div>
     </div>
     </textarea>
-    <!-- javascript coding -->
-    <script>
-        // execute your scripts when DOM is ready. this is a good habit
-        $(function () {
+
+    <textarea id="tem2">
+        <table>
+        {#foreach $T.table as record}
+		<tr>
+			<td>{$T.record.id}</td>
+			<td>{$T.record.name}</td>
+			<td>{$T.record.from}</td>
+			<td>{$T.record.to}</td>
+			
+		</tr>
+		{#/for}
+        </table>
+    </textarea>
+    <script src="http://localhost:4987/Scripts/sura.js" type="text/javascript"></script>
+    <script type="text/javascript">
+       $(function () {
 
             // initialize scrollable with mousewheel support
             $(".scrollable").scrollable({ vertical: true, mousewheel: true });
 
-            var data = {
-                name: 'User list',
-                list_id: 4,
-                table: [
-  { id: 1, name: 'Anne', age: 22, mail: 'anne@domain.com' },
-  { id: 2, name: 'Amelie', age: 24, mail: 'amelie@domain.com' },
-  { id: 3, name: 'Polly', age: 18, mail: 'polly@domain.com' },
-  { id: 4, name: 'Alice', age: 26, mail: 'alice@domain.com' },
-  { id: 5, name: 'Martha', age: 25, mail: 'martha@domain.com' }
- ]
-            };
-
-            $("#result").setTemplate($("#tem").val());
-            $("#result").processTemplate(data);
+         
+            $("#result").setTemplate($("#tem2").val());
+            $("#result").processTemplate(suradata);
 
            
         });
     </script>
 </body>
 </html>
-
-
-<!--
-   <div>
-                <div class="item">
-                    <a href="#">1</a>
-                </div>
-                <div class="item">
-                    <a href="#">2</a>
-                </div>
-                <div class="item">
-                    <a href="#">3</a>
-                </div>
-                <div class="item">
-                    <a href="#">4</a>
-                </div>
-                <div class="item">
-                    <a href="#">5</a>
-                </div>
-                <div class="item">
-                    <a href="#">6</a>
-                </div>
-                <div class="item">
-                    <a href="#">7</a>
-                </div>
-                <div class="item">
-                    <a href="#">8</a>
-                </div>
-                <div class="item">
-                    <a href="#">9</a>
-                </div>
-                <div class="item">
-                    <a href="#">10</a>
-                </div>
-            </div>
-
--->
