@@ -25,9 +25,10 @@
             });
         }
 
-        function gopage(pageno, langid) {
-            $("#loading").show();  
-            var url = "/PagesPartial/" + pageno;
+        function gopage(pageindex) {
+            var langid = $("#cbotranslate").val();
+            $("#loading").show();
+            var url = "/PagesPartial/" + pageindex;
             if (langid != "")
                 url += "?langid=" + langid;
 

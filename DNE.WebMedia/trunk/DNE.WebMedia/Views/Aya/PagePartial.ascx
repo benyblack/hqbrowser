@@ -1,4 +1,26 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<DNE.WebMedia.Model.PageAyaSimple>>" %>
+   <style>
+    /* root element for scrollable */
+.scrollable {
+
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+
+	/* vertical scrollables have typically larger height than width but not now */
+	height: 200px;
+	width: 300px;
+}
+
+/* root element for scrollable items */
+.scrollable .items {
+	position:absolute;
+
+	/* this time we have very large space for the height */
+	height:200px;
+}
+</style>
+
 <% int pageno = int.Parse(Html.ViewContext.RouteData.Values["pageno"].ToString());
    string langid = "fa";
    if (Request["langid"] != null)
@@ -13,6 +35,19 @@
     <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
         Prev</a>
     <%} %>
+    <a href="#" class="button" onclick="$('.popup').toggle();">Go To Page</a>
+    <div class="popup">
+ <div id="actions">
+        <a class="prev">&laquo; Back</a> <a class="next">Forward &raquo;</a>
+    </div>
+    <!-- root element for scrollable -->
+    <div class="scrollable vertical">
+        <!-- root element for the items -->
+        <div class="items" id="result" >
+         
+        </div>
+    </div>
+</div>
     <span id="loading" style="">
         <img class="loading" alt="" src="/img/1.gif" style="display:inline;"/></span><span id="play-info"></span>
 </p>
@@ -36,19 +71,49 @@
 </div>
 <p align="left">
     <%if (pageno < 604) { %>
-    <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>
+    <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>);return false;'>
         Next</a>
     <%} %>
     <%if (pageno > 1) { %>
-    <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
+    <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>");return false;'>
         Prev</a>
     <%} %>
 </p>
 <div id="jpId">
 </div>
+
+<textarea id="tem" style="visibility:hidden;">
+{#for k = 0 to 5}
+    <div>
+    {#for i = 0 to 9}
+        <div class="item" >
+            {#for j = 1 to 10}
+                <a href="#" onclick="gopage(this.id);" class="x" id='{$T.k*100 + $T.i * 10 + $T.j}'>{$T.k*100 + $T.i * 10 + $T.j}</a>
+            {#/for}
+        </div>
+    {#/for}
+    </div>
+{#/for}
+    <div>
+        <div class="item">
+            {#for j = 1 to 4}
+                <a href="#" onclick="gopage(this.id);" class="x" id='{600 + $T.j}'>{600 + $T.j}</a>
+            {#/for}
+        </div>
+    </div>
+</textarea>
+<script src="http://localhost:4987/Scripts/sura.js" type="text/javascript"></script>
 <script type="text/javascript" >
 var jpPlayInfo = $("#play-info");
 $(document).ready(function(){
+    
+    $(".popup").toggle();
+    /*  Page Index  */
+    $(".scrollable").scrollable({ vertical: true, mousewheel: true });
+
+    $("#result").setTemplate($("#tem").val());
+    $("#result").processTemplate(suradata);
+
     $("#cbotranslate").val("<%=langid%>");
     $("#loading").hide(); 
     $(".aya").bind("click",function(){
@@ -80,9 +145,11 @@ $(document).ready(function(){
  		jpPlayInfo.text(stts + " at " + parseInt(ppa)+"% "  + $.jPlayer.convertTime(pt) + " from " +  $.jPlayer.convertTime(tt) );
 	});
 
+    
+
 });
 
-function gotranslate(ctl) {
-    gopage(<%=pageno%>,ctl.value);
+function gotranslate() {
+    gopage(<%=pageno%>);
 }
 </script>

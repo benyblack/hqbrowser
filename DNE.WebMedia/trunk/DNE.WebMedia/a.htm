@@ -50,7 +50,7 @@ a.x
     <!-- root element for scrollable -->
     <div class="scrollable vertical">
         <!-- root element for the items -->
-        <div class="items" id="result">
+        <div class="items" id="result" >
          
         </div>
     </div>
@@ -60,9 +60,9 @@ a.x
 {#for k = 0 to 5}
     <div>
     {#for i = 0 to 9}
-        <div class="item">
+        <div class="item" >
             {#for j = 1 to 10}
-                <a href="#" class="x" id='{$T.k*100 + $T.i * 10 + $T.j}'>{$T.k*100 + $T.i * 10 + $T.j}</a>
+                <a href="#" onclick="gopage(this.id);" class="x" id='{$T.k*100 + $T.i * 10 + $T.j}'>{$T.k*100 + $T.i * 10 + $T.j}</a>
             {#/for}
         </div>
     {#/for}
@@ -71,7 +71,7 @@ a.x
     <div>
         <div class="item">
             {#for j = 1 to 4}
-                <a href="#" class="x" id='{600 + $T.j}'>{600 + $T.j}</a>
+                <a href="#" onclick="gopage(this.id);" class="x" id='{600 + $T.j}'>{600 + $T.j}</a>
             {#/for}
         </div>
     </div>
@@ -82,7 +82,7 @@ a.x
         {#foreach $T.table as record}
 		<tr>
 			<td>{$T.record.id}</td>
-			<td>{$T.record.name}</td>
+			<td onclick="gopage({$T.record.id});">{$T.record.name}</td>
 			<td>{$T.record.from}</td>
 			<td>{$T.record.to}</td>
 			
@@ -98,11 +98,16 @@ a.x
             $(".scrollable").scrollable({ vertical: true, mousewheel: true });
 
          
-            $("#result").setTemplate($("#tem2").val());
+            $("#result").setTemplate($("#tem").val());
             $("#result").processTemplate(suradata);
 
-           
+
         });
+
+        function gopage(pageid) {
+            alert(pageid);
+        }
+       
     </script>
 </body>
 </html>
