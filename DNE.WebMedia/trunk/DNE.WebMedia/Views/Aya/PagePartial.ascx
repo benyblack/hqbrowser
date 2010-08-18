@@ -1,32 +1,51 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<DNE.WebMedia.Model.PageAyaSimple>>" %>
-   <style>
-    /* root element for scrollable */
-.scrollable {
-
-	/* required settings */
-	position:relative;
-	overflow:hidden;
-
-	/* vertical scrollables have typically larger height than width but not now */
-	height: 200px;
-	width: 300px;
-}
-
-/* root element for scrollable items */
-.scrollable .items {
-	position:absolute;
-
-	/* this time we have very large space for the height */
-	height:200px;
-}
+<style>
+    .scrollable {
+        position: relative;
+        overflow: hidden;
+        height: 170px;
+        width: 250px;
+    }
+    
+    .scrollable .items {
+        position: absolute;
+        height: 200px;
+    }
+    .items a{
+        text-decoration: none;
+    }    
+    .prev{
+        float:left;
+    }
+    .next{
+        float:right;
+    }
+    #popup {
+        position: absolute;
+        z-index: 1000;
+        -moz-border-radius: 4px;
+        -webkit-border-top-left-radius: 4px;
+        -webkit-border-top-right-radius: 4px;
+        -webkit-border-bottom-left-radius: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        padding: 5px;
+        font-family: Tahoma;
+        font-size: 9pt;
+        background-color: #5a85a5;
+        color: white;
+        line-height: 130%;
+        opacity: 0.9;
+        text-shadow: black 0.1em 0.1em 0.2em; /*   IE       */
+        border-radius: 4px 4px 4px 4px;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    }
 </style>
-
 <% int pageno = int.Parse(Html.ViewContext.RouteData.Values["pageno"].ToString());
    string langid = "fa";
    if (Request["langid"] != null)
        langid = Request["langid"].ToString();
 %>
-<p align="left">
+<div align="left">
     <%if (pageno < 604) { %>
     <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>
         Next</a>
@@ -35,23 +54,20 @@
     <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
         Prev</a>
     <%} %>
-    <a href="#" class="button" onclick="$('.popup').toggle();">Go To Page</a>
-    <div class="popup">
- <div id="actions">
-        <a class="prev">&laquo; Back</a> <a class="next">Forward &raquo;</a>
-    </div>
-    <!-- root element for scrollable -->
-    <div class="scrollable vertical">
-        <!-- root element for the items -->
-        <div class="items" id="result" >
-         
+    <a href="#" class="button" onclick="pop(this)">Go To Page</a>
+    <div id="popup">
+        <div id="actions"><a href="#" class="prev">&laquo; Back</a> <a href="#" class="next">Forward &raquo;</a>
+        </div>
+        <!-- root element for scrollable -->
+        <div class="scrollable vertical">
+            <!-- root element for the items -->
+            <div class="items" id="result"></div>
         </div>
     </div>
-</div>
     <span id="loading" style="">
-        <img class="loading" alt="" src="/img/1.gif" style="display:inline;"/></span><span id="play-info"></span>
-</p>
-<div style="direction: rtl; text-align: justify;">
+        <img class="loading" alt="" src="/img/1.gif" style="display: inline;" />
+    </span><span id="play-info"></span></div>
+<div style="direction: rtl; text-align: justify;padding: 10px;">
     <% foreach (var item in Model) { %>
     <%if (item.AyaNo == 1) {%>
     <h3>
@@ -79,10 +95,8 @@
         Prev</a>
     <%} %>
 </p>
-<div id="jpId">
-</div>
-
-<textarea id="tem" style="visibility:hidden;">
+<div id="jpId"></div>
+<textarea id="tem" style="visibility: hidden;">
 {#for k = 0 to 5}
     <div>
     {#for i = 0 to 9}
@@ -103,11 +117,11 @@
     </div>
 </textarea>
 <script src="http://localhost:4987/Scripts/sura.js" type="text/javascript"></script>
-<script type="text/javascript" >
+<script type="text/javascript">
 var jpPlayInfo = $("#play-info");
 $(document).ready(function(){
     
-    $(".popup").toggle();
+    $("#popup").hide();
     /*  Page Index  */
     $(".scrollable").scrollable({ vertical: true, mousewheel: true });
 
@@ -149,6 +163,19 @@ $(document).ready(function(){
 
 });
 
+function pop(c) {
+    var position = $(c).position();
+    var left = position.left;
+    var top = position.top;
+    var h = $(c).height();
+    var w = $(c).width();
+    $('#popup').css({ position: "absolute",
+            marginLeft: 0, marginTop: 0,
+            top: top+h+20, left: left+w+20});
+    $('#popup').slideToggle();
+
+    
+}
 function gotranslate() {
     gopage(<%=pageno%>);
 }
