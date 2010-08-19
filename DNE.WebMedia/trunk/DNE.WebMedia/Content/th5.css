@@ -8,36 +8,30 @@
 }
 */
 
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
-body
-{
+body {
     background: url(../img/bodybg.png) top left repeat;
     color: #FFF;
 }
 
-p
-{
+p {
     font: normal 12px Arial, Helvetica, sans-serif;
     color: #FFF;
     padding: 8px 0;
 }
 
-a
-{
+a {
     font: normal 12px Arial, Helvetica, sans-serif;
     color: #FFF;
 }
-a:hover
-{
+a:hover {
     color: #CCC;
 }
 
-a.button
-{
+a.button {
     padding: 6px;
     background: #69a707;
     color: #FFF;
@@ -54,24 +48,19 @@ a.button
     text-transform: uppercase;
     font-weight: bold;
     border: 2px solid transparent; /* for IE */
-    border-radius: 10px 0px 10px 10px;
-    behavior: url(/content/PIE.htc);
+    border-radius: 10px 0px 10px 10px; /* behavior: url(/content/PIE.htc);*/
 }
-a.button:hover
-{
+a.button:hover {
     border: 2px solid #fff;
 }
-h1, h2, h3, h4
-{
+h1, h2, h3, h4 {
     text-transform: uppercase;
     font-family: champ, arial, verdana, sans-serif;
 }
-h1,h2
-{
+h1, h2 {
     text-shadow: black 0.1em 0.1em 0.2em;
 }
-#container
-{
+#container {
     background: #444;
     width: 860px;
     border: 1px solid #FFF;
@@ -88,12 +77,10 @@ h1,h2
     behavior: url(/content/PIE.htc);
 }
 
-#header
-{
+#header {
 }
 
-#header h1
-{
+#header h1 {
     font-family: champ, arial, sans-serif;
     text-transform: uppercase;
     font-size: 50px;
@@ -103,8 +90,7 @@ h1,h2
     width: 400px;
     text-align: center;
 }
-#header p
-{
+#header p {
     font-family: arial, sans-serif;
     color: #CCC;
     display: block;
@@ -112,19 +98,16 @@ h1,h2
     width: 420px;
 }
 
-#nav
-{
+#nav {
     width: 860px;
     clear: both;
     border-bottom: 1px dotted #666;
     height: 32px;
     padding: 16px 0 0 0;
 }
-#nav ul
-{
+#nav ul {
 }
-#nav li
-{
+#nav li {
     list-style: none;
     display: block;
     float: left;
@@ -135,70 +118,58 @@ h1,h2
     -moz-border-radius-topright: 10px;
     border-bottom: 0;
 }
-#nav li a
-{
+#nav li a {
     font: bold 16px champ, arial, verdana, sans-serif;
     text-transform: uppercase;
     text-decoration: none;
 }
-#nav li:hover
-{
+#nav li:hover {
     background: #000;
 }
-#nav li:hover a
-{
+#nav li:hover a {
     color: #FFF;
 }
 
-#content
-{
+#content {
     float: left;
     width: 640px;
     padding: 20px 20px 0 0;
 }
 
-#welcome
-{
+#welcome {
     border-bottom: 1px dotted #666;
     padding: 0 0 20px 0;
 }
 
-.column
-{
+.column {
     float: left;
     width: 206px;
     padding: 10px 10px 10px 0;
 }
-.column img
-{
+.column img {
     border: 3px solid #333;
     margin: 4px 0;
     opacity: 0.5;
 }
-.column:hover img
-{
+.column:hover img {
     opacity: 1;
 }
-.column p
-{
+.column p {
     font-size: 11px;
     padding: 4px 0;
 }
-.column:last-of-type
-{
+.column:last-of-type {
     padding: 10px 0;
 }
 
 
-#sidebar
-{
+#sidebar {
     float: left;
     width: 200px;
     padding: 20px 0 0 0;
 }
 
-.sidepanel
-{
+.sidepanel {
     width: 188px;
     border: 1px dotted #666;
     -moz-border-radius-bottomleft: 5px;
@@ -212,24 +183,20 @@ h1,h2
     margin: 0 0 8px 0;
     color: #CCC;
     position: relative;
-    border-radius: 5px 0px 5px 5px;
-    behavior: url(/content/PIE.htc);
+    border-radius: 5px 0px 5px 5px; /*behavior: url(/content/PIE.htc);*/
 }
-.sidepanel h4
-{
+.sidepanel h4 {
     font-family: arial;
     font-size: 13px;
 }
-.sidepanel p
-{
+.sidepanel p {
     padding: 4px 0;
     font-size: 11px;
     color: #CCC;
 }
 
 
-#footer
-{
+#footer {
     clear: both;
     width: 860px;
     padding: 30px 0 10px 0;
@@ -238,53 +205,107 @@ h1,h2
 
 /*      hqb        */
 
-.aya
-{
+.aya {
     /*float:right;*/
     line-height: 200%;
     font-family: Arial;
     font-size: x-large;
 }
-.tooltip
-{
+.tooltip {
     background: #c8c8c8;
     display: none;
     padding: 10px;
     position: absolute;
     z-index: 1000;
     -moz-border-radius: 4px;
-    
     -webkit-border-top-left-radius: 4px;
     -webkit-border-top-right-radius: 4px;
     -webkit-border-bottom-left-radius: 4px;
     -webkit-border-bottom-right-radius: 4px;
-    
     font-family: Tahoma;
     font-size: 9pt;
     max-width: 300px;
     text-align: justify;
     background-color: #5a85a5;
+    background: rgba(90, 133, 165, 0.9);
     color: white;
     min-height: 30px;
     line-height: 130%;
-    opacity: 0.9;
-    text-shadow: black 0.1em 0.1em 0.2em;
-    /*   IE       */
+    text-shadow: black 0.1em 0.1em 0.2em; /*   IE       */
     border-radius: 4px 4px 4px 4px;
-    behavior: url('/content/PIE.htc');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /*behavior: url('/content/PIE.htc');*/
 }
-div.rtl
-{
+div.rtl {
     direction: rtl;
 }
-div.ltr
-{
+div.ltr {
     direction: ltr;
     text-align: left;
 }
-.loading
-{
-  display: inline;
-  
- 
+.loading {
+    display: inline;
+}
+.scrollable {
+    position: relative;
+    overflow: hidden;
+    height: 170px;
+    width: 250px;
+}
+
+.scrollable .items {
+    position: absolute;
+    height: 200px;
+}
+.scrollable2 {
+    position: relative;
+    overflow: hidden;
+    height: 170px;
+    width: 170px;
+}
+.items a {
+    text-decoration: none;
+}
+.prev {
+    float: left;
+}
+.next {
+    float: right;
+}
+#popup {
+    position: absolute;
+    z-index: 1000;
+    -moz-border-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    padding: 5px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    background-color: #5a85a5;
+    color: white;
+    line-height: 130%;
+    opacity: 0.9;
+    text-shadow: black 0.1em 0.1em 0.2em; /*   IE       */
+    border-radius: 4px 4px 4px 4px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+}
+#popup2 {
+    position: absolute;
+    z-index: 1000;
+    -moz-border-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    padding: 5px;
+    font-family: Tahoma;
+    font-size: 9pt;
+    background-color: #5a85a5;
+    color: white;
+    line-height: 130%;
+    opacity: 0.9;
+    text-shadow: black 0.1em 0.1em 0.2em; /*   IE       */
+    border-radius: 4px 4px 4px 4px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 }

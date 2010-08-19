@@ -78,17 +78,18 @@ a.x
     </textarea>
 
     <textarea id="tem2">
-        <table>
-        {#foreach $T.table as record}
-		<tr>
-			<td>{$T.record.id}</td>
-			<td onclick="gopage({$T.record.id});">{$T.record.name}</td>
-			<td>{$T.record.from}</td>
-			<td>{$T.record.to}</td>
+    {#for index = 0 to 11}
+        <div class="item" >
+        {#foreach $T.table as record begin=$T.index*10 count=10}
+		<div>
+			<span>{$T.record.id}</span>
+			<a href="/pages/{$T.record.from}" onclick="gopage({$T.record.from});">{$T.record.name}</a>
+			<span>{$T.record.from},{$T.record.to}</span>
 			
-		</tr>
+		</div>
 		{#/for}
-        </table>
+        </div>
+    {#/for}
     </textarea>
     <script src="http://localhost:4987/Scripts/sura.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -98,7 +99,7 @@ a.x
             $(".scrollable").scrollable({ vertical: true, mousewheel: true });
 
          
-            $("#result").setTemplate($("#tem").val());
+            $("#result").setTemplate($("#tem2").val());
             $("#result").processTemplate(suradata);
 
 

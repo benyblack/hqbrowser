@@ -1,45 +1,4 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<DNE.WebMedia.Model.PageAyaSimple>>" %>
-<style>
-    .scrollable {
-        position: relative;
-        overflow: hidden;
-        height: 170px;
-        width: 250px;
-    }
-    
-    .scrollable .items {
-        position: absolute;
-        height: 200px;
-    }
-    .items a{
-        text-decoration: none;
-    }    
-    .prev{
-        float:left;
-    }
-    .next{
-        float:right;
-    }
-    #popup {
-        position: absolute;
-        z-index: 1000;
-        -moz-border-radius: 4px;
-        -webkit-border-top-left-radius: 4px;
-        -webkit-border-top-right-radius: 4px;
-        -webkit-border-bottom-left-radius: 4px;
-        -webkit-border-bottom-right-radius: 4px;
-        padding: 5px;
-        font-family: Tahoma;
-        font-size: 9pt;
-        background-color: #5a85a5;
-        color: white;
-        line-height: 130%;
-        opacity: 0.9;
-        text-shadow: black 0.1em 0.1em 0.2em; /*   IE       */
-        border-radius: 4px 4px 4px 4px;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    }
-</style>
 <% int pageno = int.Parse(Html.ViewContext.RouteData.Values["pageno"].ToString());
    string langid = "fa";
    if (Request["langid"] != null)
@@ -54,14 +13,25 @@
     <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
         Prev</a>
     <%} %>
-    <a href="#" class="button" onclick="pop(this)">Go To Page</a>
-    <div id="popup">
+    <a href="#" class="button" onclick="pop(this)">Go To Page</a> 
+    <a href="#" class="button" onclick="pop2(this)">Go To Sura</a> 
+
+    <div id="popup" >
         <div id="actions"><a href="#" class="prev">&laquo; Back</a> <a href="#" class="next">Forward &raquo;</a>
         </div>
         <!-- root element for scrollable -->
         <div class="scrollable vertical">
             <!-- root element for the items -->
             <div class="items" id="result"></div>
+        </div>
+    </div>
+     <div id="popup2" >
+        <div id="actions"><a href="#" class="prev">&laquo; Back</a> <a href="#" class="next">Forward &raquo;</a>
+        </div>
+        <!-- root element for scrollable -->
+        <div class="scrollable vertical" style="width:170px;">
+            <!-- root element for the items -->
+            <div class="items" id="result2"></div>
         </div>
     </div>
     <span id="loading" style="">
@@ -86,12 +56,12 @@
     <% } %>
 </div>
 <p align="left">
-    <%if (pageno < 604) { %>
-    <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>);return false;'>
+   <%if (pageno < 604) { %>
+    <a href='/Pages/<%=(pageno + 1) %>' class="button" onclick='gopage(<%=(pageno + 1) %>,"<%=langid %>");return false;'>
         Next</a>
     <%} %>
     <%if (pageno > 1) { %>
-    <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>");return false;'>
+    <a href='/Pages/<%=(pageno - 1) %>' class="button" onclick='gopage(<%=(pageno - 1) %>,"<%=langid %>");return false;'>
         Prev</a>
     <%} %>
 </p>
@@ -116,17 +86,35 @@
         </div>
     </div>
 </textarea>
-<script src="http://localhost:4987/Scripts/sura.js" type="text/javascript"></script>
+ <textarea id="tem2" style="visibility: hidden;">
+    {#for index = 0 to 11}
+        <div class="item" >
+        {#foreach $T.table as record begin=$T.index*10 count=10}
+		<div>
+			<span>{$T.record.id}</span>.
+			<a href="/pages/{$T.record.from}" onclick="gopage({$T.record.from});return false;">{$T.record.name}</a>
+			
+			
+		</div>
+		{#/for}
+        </div>
+    {#/for}
+    </textarea>
+<script src="/Scripts/sura.js" type="text/javascript"></script>
 <script type="text/javascript">
 var jpPlayInfo = $("#play-info");
 $(document).ready(function(){
     
     $("#popup").hide();
+    $("#popup2").hide();
     /*  Page Index  */
     $(".scrollable").scrollable({ vertical: true, mousewheel: true });
 
     $("#result").setTemplate($("#tem").val());
     $("#result").processTemplate(suradata);
+
+    $("#result2").setTemplate($("#tem2").val());
+    $("#result2").processTemplate(suradata);
 
     $("#cbotranslate").val("<%=langid%>");
     $("#loading").hide(); 
@@ -173,7 +161,18 @@ function pop(c) {
             marginLeft: 0, marginTop: 0,
             top: top+h+20, left: left+w+20});
     $('#popup').slideToggle();
-
+    
+}
+function pop2(c) {
+    var position = $(c).position();
+    var left = position.left;
+    var top = position.top;
+    var h = $(c).height();
+    var w = $(c).width();
+    $('#popup2').css({ position: "absolute",
+            marginLeft: 0, marginTop: 0,
+            top: top+h+20, left: left+w+20});
+    $('#popup2').slideToggle();
     
 }
 function gotranslate() {
