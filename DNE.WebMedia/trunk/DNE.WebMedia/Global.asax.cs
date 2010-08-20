@@ -14,9 +14,15 @@ namespace DNE.WebMedia {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-            "PagesApi", // Route name
-            "pages/{pageno}.{type}", // URL with parameters
-            new { controller = "Aya", action = "Page", pageno = 1 }
+            "SuraIndex", // Route name
+            "SuraIndex/", // URL with parameters
+            new { controller = "Aya", action = "SuraIndex" }
+        );
+
+            routes.MapRoute(
+            "PageIndex", // Route name
+            "PageIndex/", // URL with parameters
+            new { controller = "Aya", action = "PageIndex" }
         );
             routes.MapRoute(
              "Pages", // Route name
@@ -87,7 +93,7 @@ namespace DNE.WebMedia {
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
-           // RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+           //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
 
         }
     }

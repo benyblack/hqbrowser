@@ -46,7 +46,7 @@ namespace DNE.WebMedia.Controllers {
             var sura = db.Aya.Include("Translate").Where(x => x.SuraId == id);
             List<AyaSimple> ayas = new List<AyaSimple>();
             foreach (Aya a in sura) {
-                ayas.Add(new AyaSimple(a,langid));
+                ayas.Add(new AyaSimple(a, langid));
             }
             if (type == "xml") {
                 return new XmlResult(ayas);
@@ -107,7 +107,7 @@ namespace DNE.WebMedia.Controllers {
         }
 
         //GET /Page/{pageno}
-        public ActionResult PagePartial(int pageno,string langid = "fa") {
+        public ActionResult PagePartial(int pageno, string langid = "fa") {
             HQEntities db = new HQEntities();
             var ps = db.PageAyas.Include("Aya").Where(x => x.PageId == pageno);
             List<PageAyaSimple> psa = new List<PageAyaSimple>();
@@ -116,6 +116,28 @@ namespace DNE.WebMedia.Controllers {
 
             }
             return View(psa);
+        }
+
+        public ActionResult PageIndex() {
+            HQEntities db = new HQEntities();
+            var p = db.PageAyas.Select(x => new SuraIndex() {
+                Sura = (db.Aya.Where(z => z.Id == z.AyaId).Take(1).FirstOrDefault().sura),
+                SuraNo = x.SuraNo,
+                Min = (db.PageAyas.Where(z => z.SuraNo == x.SuraNo).Min(z => z.PageId)),
+                Max = (db.PageAyas.Where(z => z.SuraNo == x.SuraNo).Max(z => z.PageId))
+            });
+            return View(p.ToList());
+        }
+
+        public ActionResult SuraIndex() {
+            HQEntities db = new HQEntities();
+            var p = db.PageAyas.Select(x => new SuraIndex() {
+                Sura = (db.Aya.Where(z => z.AyaId == x.AyaId).Take(1).FirstOrDefault().sura),
+                SuraNo = x.SuraNo,
+                Min = (db.PageAyas.Where(z => z.SuraNo == x.SuraNo).Min(z => z.PageId)),
+                Max = (db.PageAyas.Where(z => z.SuraNo == x.SuraNo).Max(z => z.PageId))
+            }).Distinct();
+            return View(p.ToList());
         }
     }
 }

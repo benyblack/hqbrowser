@@ -119,10 +119,12 @@
     <Content Include="Scripts\sura.js" />
     <Content Include="Views\Aya\AyaDetail.aspx" />
     <Content Include="Views\Aya\Page.aspx" />
+    <Content Include="Views\Aya\PageIndex.aspx" />
     <Content Include="Views\Aya\PagePartial.ascx" />
     <Content Include="Views\Aya\SuraAya.aspx" />
     <Content Include="Views\Aya\SuraDetail.aspx" />
     <Content Include="Content\th5.css" />
+    <Content Include="Views\Aya\SuraIndex.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -151,14 +153,15 @@
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DNE.WebMedia.Common\DNE.WebMedia.Common.csproj">
       <Project>{256493FE-2643-4BB2-B676-8A9598D2795C}</Project>
       <Name>DNE.WebMedia.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\HQb.rar" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

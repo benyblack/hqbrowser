@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<DNE.WebMedia.Model.PageAyaSimple>>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<PageAyaSimple>>" %>
 <% int pageno = int.Parse(Html.ViewContext.RouteData.Values["pageno"].ToString());
    string langid = "fa";
    if (Request["langid"] != null)
@@ -104,7 +104,7 @@
 <script type="text/javascript">
 var jpPlayInfo = $("#play-info");
 $(document).ready(function(){
-    
+    document.title = '<%:string.Join(", ", Model.Select(x => x.Sura).ToArray().Distinct())%>';
     $("#popup").hide();
     $("#popup2").hide();
     /*  Page Index  */

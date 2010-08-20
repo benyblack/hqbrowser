@@ -309,3 +309,7 @@ div.ltr {
     border-radius: 4px 4px 4px 4px;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 }
+div.suraindex a{
+    font-family: Tahoma;
+    font-size: 12px;
+}

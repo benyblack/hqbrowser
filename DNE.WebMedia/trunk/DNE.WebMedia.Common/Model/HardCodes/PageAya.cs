@@ -35,4 +35,12 @@ namespace DNE.WebMedia.Model {
         public int AyaNo { get; set; }
         public int SuraNo { get; set; }
     }
+
+    public class SuraIndex {
+        public string Sura { get; set; }
+        public int SuraNo { get; set; }
+        public int Min { get; set; }
+        public int Max { get; set; }
+        
+    }
 }
