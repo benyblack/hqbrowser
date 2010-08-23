@@ -24,6 +24,13 @@ namespace DNE.WebMedia {
             "PageIndex/", // URL with parameters
             new { controller = "Aya", action = "PageIndex" }
         );
+
+            routes.MapRoute(
+            "PagesApi", // Route name
+            "pages/{pageno}.{type}", // URL with parameters
+            new { controller = "Aya", action = "Page", pageno = 1 }
+        );
+
             routes.MapRoute(
              "Pages", // Route name
              "pages/{pageno}", // URL with parameters
@@ -93,7 +100,7 @@ namespace DNE.WebMedia {
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
-           //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+ //          RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
 
         }
     }
