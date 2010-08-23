@@ -104,7 +104,8 @@
 <script type="text/javascript">
 var jpPlayInfo = $("#play-info");
 $(document).ready(function(){
-    document.title = '<%:string.Join(", ", Model.Select(x => x.Sura).ToArray().Distinct())%>';
+    document.title = '<%:string.Join(", ", Model.Select(x => x.Sura).ToArray().Distinct()) + ", Page:" +
+        Html.ViewContext.RouteData.Values["pageno"].ToString()%>';
     $("#popup").hide();
     $("#popup2").hide();
     /*  Page Index  */

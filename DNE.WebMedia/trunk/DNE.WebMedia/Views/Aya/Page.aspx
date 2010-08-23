@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<DNE.WebMedia.Model.PageAyaSimple>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%:string.Join(", ", Model.Select(x => x.Sura).ToArray().Distinct())%>
+    <%:string.Join(", ", Model.Select(x => x.Sura).ToArray().Distinct()) + ", Page:" +
+        Html.ViewContext.RouteData.Values["pageno"].ToString()
+        %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="pagecontent" >
