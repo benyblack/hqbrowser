@@ -6,6 +6,8 @@
     <title>
         <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>
+    <meta name="description" content="An advanced tools for browsing and embedding original text,translations and Audio of Holy Quran" />
+    <meta name="keywords" content="Quran,Translate,Text,Api" />
     <link href="/Content/th5.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
