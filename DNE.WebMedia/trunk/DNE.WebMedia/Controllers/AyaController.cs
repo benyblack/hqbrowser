@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using DNE.WebMedia.Model;
 using MvcContrib.ActionResults;
+using System.IO;
+using DNE.WebMedia.Helper;
 
 
 namespace DNE.WebMedia.Controllers {
@@ -21,15 +23,17 @@ namespace DNE.WebMedia.Controllers {
             return View(Aya.GetOne(id, true));
         }
 
-        public ActionResult SuraAya(int sid, int aid, string type = "") {
+        public ActionResult SuraAya(int sid, int aid,string langid = "fa", string type = "", string jsoncallback = "") {
             HQEntities db = new HQEntities();
             var a = db.Aya.Where(x => x.SuraId == sid && x.AyaId == aid);
             if (a.Count() > 0) {
                 if (type == "xml") {
-                    return new XmlResult(new AyaSimple(a.First()));
+                    return new XmlResult(new AyaSimple(a.First() ,langid));
 
                 } else if (type == "json") {
-                    return new JsonResult() { Data = (new AyaSimple(a.First())), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+                    return new JsonpResult() { Data = (new AyaSimple(a.First(), langid)), Callback = jsoncallback, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                
 
                 } else if (type == "") {
                     return View(a.First());
@@ -38,6 +42,15 @@ namespace DNE.WebMedia.Controllers {
 
             }
             return View();
+
+        }
+
+        public ActionResult RandomAya(string jsoncallback,string langid = "fa") {
+            Random r = new Random();
+            int aid = r.Next(1, 6236);
+            Aya a = Aya.GetOne(aid, true);
+            return new JsonpResult() { Data = (new AyaSimple(a,langid)), Callback = jsoncallback, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                
 
         }
 

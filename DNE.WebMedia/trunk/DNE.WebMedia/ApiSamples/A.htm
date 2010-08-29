@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        marquee {
+            background-color: Lime;
+        }
+        pre {
+            background-color: #eee;
+        }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+    <fieldset>
+        Random aya
+        <marquee id="hqb" behavior="slide" loop="10" dir="rtl" direction="right"></marquee>
+        Code:
+        <pre style="font-family: consolas">&nbsp;&nbsp;$.getJSON(<span style="color: maroon">
+            &#39;http://hqb.eserve.ir/randomaya?jsoncallback=?&#39;</span>,&nbsp;<span style="color: blue">function</span>&nbsp;(data)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span
+    style="color: maroon">&#39;#hqb&#39;</span>).html(data.TextFull&nbsp;+&nbsp;<span
+        style="color: maroon">&quot;&nbsp;*&nbsp;&quot;</span>&nbsp;+&nbsp;data.Translate);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</pre>
+        Random aya with english translation
+        <marquee id="hqb2" behavior="slide" loop="10" dir="ltr" direction="right"></marquee>
+        Code:<pre style="font-family: consolas">&nbsp;&nbsp;&nbsp;&nbsp;$.getJSON(<span style="color: maroon">&#39;http://hqb.eserve.ir/randomaya?langid=en&amp;jsoncallback=?&#39;</span>,&nbsp;<span
+            style="color: blue">function</span>&nbsp;(data)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span
+    style="color: maroon">&#39;#hqb2&#39;</span>).html(data.TextFull&nbsp;+&nbsp;<span
+        style="color: maroon">&quot;&nbsp;*&nbsp;&quot;</span>&nbsp;+&nbsp;data.Translate);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+</pre>
+        <br />
+        &nbsp;Specified Aya
+        <marquee id="hqb3" behavior="slide" loop="10" dir="rtl" direction="right"></marquee>
+        Code:
+        <pre style="font-family: consolas">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.getJSON(<span
+    style="color: maroon">&#39;http://hqb.eserve.ir/aya/10/12.json?jsoncallback=?&#39;</span>,&nbsp;<span
+        style="color: blue">function</span>&nbsp;(data)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(<span
+    style="color: maroon">&#39;#hqb3&#39;</span>).html(<span style="color: maroon">&quot;&lt;p&nbsp;title=\&quot;&quot;</span>&nbsp;+&nbsp;data.Sura&nbsp;+&nbsp;<span
+        style="color: maroon">&quot;&nbsp;Aya&nbsp;No.&quot;</span>&nbsp;+&nbsp;data.AyaId&nbsp;+&nbsp;<span
+            style="color: maroon">&quot;\&quot;&gt;&quot;</span>&nbsp;+&nbsp;data.TextFull&nbsp;+&nbsp;<span
+                style="color: maroon">&quot;&lt;/p&gt;&quot;</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+</pre>
+    </fieldset>
+    <script type="text/javascript">
+        function get_random() {
+            var ranNum = Math.floor(Math.random() * 6235);
+            return ranNum + 1;
+        }
+
+        $(function () {
+            $.getJSON('http://hqb.eserve.ir/randomaya?jsoncallback=?', function (data) {
+                $('#hqb').html(data.TextFull + " * " + data.Translate);
+            });
+
+            $.getJSON('http://hqb.eserve.ir/randomaya?langid=en&jsoncallback=?', function (data) {
+                $('#hqb2').html(data.TextFull + " * " + data.Translate);
+            });
+
+            $.getJSON('http://hqb.eserve.ir/aya/10/12.json?jsoncallback=?', function (data) {
+                $('#hqb3').html("<p title=\"" + data.Sura + " Aya No." + data.AyaId + "\">" + data.TextFull + "</p>");
+            });
+
+
+        });
+
+        
+    </script>
+</body>
+</html>

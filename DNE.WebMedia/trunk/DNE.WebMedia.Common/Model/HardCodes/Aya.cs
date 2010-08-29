@@ -234,12 +234,13 @@ public partial class Aya:ICloneable
 
         public AyaSimple(Aya a, string langid = "fa")
         {
+            int aid = a.Id;
             this.SuraId = a.SuraId;
             this.Sura = a.sura;
             this.AyaId = a.AyaId;
             this.Text = a.Text;
             this.TextFull = a.TextFull;
-            this.Translate = a.Translate.Where(x => x.AyaId == AyaId && x.LangId == langid).First().Text;
+            this.Translate = a.Translate.Where(x => x.AyaId == aid && x.LangId == langid).First().Text;
             
         }
 

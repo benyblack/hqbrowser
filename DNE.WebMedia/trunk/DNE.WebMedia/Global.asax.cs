@@ -13,6 +13,13 @@ namespace DNE.WebMedia {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+            "RandomAya", // Route name
+            "RandomAya/", // URL with parameters
+            new { controller = "Aya", action = "RandomAya" }
+        );
+
             routes.MapRoute(
             "SuraIndex", // Route name
             "SuraIndex/", // URL with parameters
