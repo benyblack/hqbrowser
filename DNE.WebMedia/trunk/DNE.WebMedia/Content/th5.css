@@ -1,12 +1,12 @@
 /* set our custom font family using @font-face */
 
-/*
+
 @font-face
 {
-    font-family: champ;
-    src: url("../fonts/CL.ttf") format("truetype");
+    font-family: Scheherazade;
+    src: url("ScheherazadeRegOT.ttf") format("truetype");
 }
-*/
+
 
 * {
     margin: 0;
@@ -201,6 +201,7 @@ h1, h2 {
     width: 860px;
     padding: 30px 0 10px 0;
     text-align: right;
+    font-family: 
 }
 
 /*      hqb        */
@@ -210,6 +211,7 @@ h1, h2 {
     line-height: 200%;
     font-family: Arial;
     font-size: x-large;
+    font-family: Scheherazade, Arial;
 }
 .tooltip {
     background: #c8c8c8;
